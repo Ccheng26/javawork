@@ -1,0 +1,169 @@
+package com.home.bo;
+
+import java.util.Calendar;
+
+import com.home.dao.QuoteDetailDAO;
+import com.home.exception.RegistrationException;
+import com.home.model.*;
+import com.home.RegUserConstants;
+//get user and return user
+//query by string
+//userDAO makes connection and queries database
+public class QuoteDetailBO {
+	double coverage=0;
+	public double createDwellingCoverage(int sqft, int year_built) {
+		double home_value = 120 * sqft;
+		int year = Calendar.getInstance().get(Calendar.YEAR);
+		int difference = year - year_built;
+		if (difference > 0 && difference < 5) {
+			coverage = home_value - (0.10 * home_value);
+		} else if (10 > difference && difference >= 5) {
+			coverage = home_value - (0.20 * home_value);
+		} else if (20 > difference && difference >= 10) {
+			coverage = home_value - (0.30 * home_value);
+		} else {
+			coverage = home_value - (0.50 * home_value);
+		}
+		return this.coverage;
+	}
+
+	public double makeMonthlyPremium(int market_val, String residence_type) {
+		double market_value = (double) market_val;
+		double start_value = (market_value / 1000.00) * 5.0;
+		String residence = residence_type;
+		double monthly;
+		if ("Single-Family Home".equals(residence)) {
+			monthly = (start_value + .5 * start_value) / 12;
+		} else if ("Condo".equals(residence)) {
+			monthly = (start_value + .06 * start_value) / 12;
+		} else if ("Duplex".equals(residence)) {
+			monthly = (start_value + .06 * start_value) / 12;
+		} else if ("Apartment".equals(residence)) {
+			monthly = (start_value + .06 * start_value) / 12;
+		} else if ("Townhouse".equals(residence)) {
+			monthly = (start_value + .07 * start_value) / 12;
+		} else if ("Rowhouse".equals(residence)) {
+			monthly = (start_value + .07 * start_value) / 12;
+		} else {
+			monthly = start_value / 12;
+		}
+		return monthly;
+	}
+	public double calcDetachedStructures(){
+		return this.coverage*DETACHED_STRUCTURES_RATE;
+	} 
+	public double calcPersonalProperty(){
+		return this.coverage*PERSONAL_PROPERTY_RATE;
+	}
+	public double calcAdditionalLiving(){
+		return this.coverage*ADDITIONAL_LIVING_EXP_RATE;
+	}
+	public double calcDeductible(){
+		return this.coverage*DEDUCTIBLE_RATE;
+	}
+	public double calcMedExp(){
+		return MED_EXP;
+	}
+	public QuoteDetails getQuoteDetails(final int user_id) throws RegistrationException {
+		
+		final QuoteDetailDAO loginDAO = new QuoteDetailDAO();
+		QuoteDetails quote = null;
+		try {
+			System.out.println("get quote details called successfully");
+			quote = loginDAO.getQuoteDetails(user_id);
+		} catch (RegistrationException e) {
+			System.out.println("get quote details call failed");
+			e.printStackTrace();
+			throw new RegistrationException(e.getMessage());
+		}
+		return quote;
+	}
+
+	// public double createDwellingCoverage(PropertyDetails property) {
+	// 	double home_value = 120 * property.getSqft();
+	// 	int yearbuilt = property.getYearBuilt();
+	// 	int year = Calendar.getInstance().get(Calendar.YEAR);
+	// 	int difference = year - yearbuilt;
+	// 	double coverage;
+
+	// 	if (difference > 0 && difference < 5) {
+	// 		coverage = home_value - (0.10 * home_value);
+	// 	} else if (10 > difference && difference >= 5) {
+	// 		coverage = home_value - (0.20 * home_value);
+	// 	} else if (20 > difference && difference >= 10) {
+	// 		coverage = home_value - (0.30 * home_value);
+	// 	} else {
+	// 		coverage = home_value - (0.50 * home_value);
+	// 	}
+	// 	return coverage;
+	// }
+	// public double makeMonthlyPremium(PropertyDetails property, LocationAddress locale) {
+	// 	double market_value = (double) property.getMarketValue();
+	// 	double start_value = (market_value / 1000.00) * 5.0;
+	// 	String residence = locale.getResidenceType();
+	// 	System.out.println("make monthly premium called");
+	// 	System.out.println(residence);
+	// 	double monthly;
+	// 	if ("Single-Family Home".equals(residence)) {
+	// 		monthly = (start_value + .5 * start_value) / 12;
+	// 	} else if ("Condo".equals(residence)) {
+	// 		monthly = (start_value + .06 * start_value) / 12;
+	// 	} else if ("Duplex".equals(residence)) {
+	// 		monthly = (start_value + .06 * start_value) / 12;
+	// 	} else if ("Apartment".equals(residence)) {
+	// 		monthly = (start_value + .06 * start_value) / 12;
+	// 	} else if ("Townhouse".equals(residence)) {
+	// 		monthly = (start_value + .07 * start_value) / 12;
+	// 	} else if ("Rowhouse".equals(residence)) {
+	// 		monthly = (start_value + .07 * start_value) / 12;
+	// 	} else {
+	// 		monthly = start_value / 12;
+	// 	}
+	// 	return monthly;
+	// }
+	// public void saveQuote(final QuoteDetails quote, final PropertyDetails property, final LocationAddress locale)
+	// 		throws RegistrationException {
+	// 	/**
+	// 	 * System.out.println(quoteList.size()); for(LocationAddress l : locDetails ) {
+	// 	 * System.out.println(locDetails.getResidenceType());
+	// 	 **/
+	// 	System.out.println("save quote called");
+	// 	final QuoteDetailDAO quoteDAO = new QuoteDetailDAO();
+	// 	try {
+	// 		System.out.println("quote detail bo being hit saving quote");
+	// 		quoteDAO.saveQuoteDetails(quote, property, locale);
+	// 	} catch (RegistrationException e) {
+	// 		e.printStackTrace();
+	// 		throw new RegistrationException(e.getMessage());
+	// 	}
+	// }
+	public void saveQuote(final QuoteDetails quote) throws RegistrationException {
+		System.out.println("save quote called");
+		final QuoteDetailDAO quoteDAO = new QuoteDetailDAO();
+		try {
+			System.out.println("quote detail bo being hit saving quote");
+			quoteDAO.saveQuoteDetails(quote);
+		} catch (RegistrationException e) {
+			e.printStackTrace();
+			throw new RegistrationException(e.getMessage());
+		}
+	}
+	public static void main(String[] args) throws RegistrationException {
+		System.out.println("quote detail bo being hit");
+		// LocationAddressBO loc = new LocationAddressBO();
+		// LocationAddress locale = loc.getLocationAddress(1);
+		//
+		// PropertyDetailBO o = new PropertyDetailBO();
+		// PropertyDetails property = o.getLocationId(1);
+		// System.out.println(o.getLocationId(1).getDwellStyle());
+		// System.out.println(o.getLocationId(1).getGarageType());
+		// System.out.println(o.getLocationId(1).getHasPool());
+		// System.out.println(o.getLocationId(1).getMarketValue());
+		// QuoteDetailBO oo = new QuoteDetailBO();
+		// System.out.println("property is "+ property.getMarketValue()+ "locale is" +
+		// locale.getLocationId());
+		// oo.saveQuote(property, locale);
+		// oo.saveQuote(quote, o.getLocationId(1), loc.getLocationAddressr(1));
+
+	}
+}

@@ -1,0 +1,52 @@
+package com.home.bo;
+
+import com.home.dao.HomeownerDAO;
+import com.home.dao.PropertyDetailDAO;
+import com.home.exception.RegistrationException;
+import com.home.model.Homeowners;
+import com.home.model.PropertyDetails;
+
+public class PropertyDetailBO {
+	public PropertyDetails getLocationId(final int location_id) throws RegistrationException {
+
+		final PropertyDetailDAO loginDAO = new PropertyDetailDAO();
+		PropertyDetails property_information = null;
+		try {
+			property_information = loginDAO.getLocationId(location_id);
+		} catch (RegistrationException e) {
+			e.printStackTrace();
+			throw new RegistrationException(e.getMessage());
+		}
+		return property_information;
+	}
+
+	public PropertyDetails getOneLocationId(final int user_id, final int location_id) throws RegistrationException {
+
+		final PropertyDetailDAO loginDAO = new PropertyDetailDAO();
+		PropertyDetails property_information = null;
+		try {
+			property_information = loginDAO.getOneLocationId(user_id, location_id);
+		} catch (RegistrationException e) {
+			throw new RegistrationException(e.getMessage());
+		}
+		return property_information;
+	}
+
+	public void saveProperty(final PropertyDetails property_information) throws RegistrationException {
+		System.out.println("inside the propertyBO");
+		final PropertyDetailDAO propertyInformationDAO = new PropertyDetailDAO();
+		try {
+			propertyInformationDAO.savePropertyDetails(property_information);
+
+		} catch (RegistrationException e) {
+			throw new RegistrationException(e.getMessage());
+		}
+	}
+
+	public static void main(String[] args) throws RegistrationException {
+		// TODO Auto-generated method stub
+		//PropertyDetailBO o = new PropertyDetailBO();
+		//o.getLocationId(1);
+	}
+
+}

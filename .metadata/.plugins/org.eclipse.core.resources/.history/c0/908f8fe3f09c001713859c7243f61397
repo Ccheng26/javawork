@@ -1,0 +1,70 @@
+package com.home.bo;
+
+import com.home.dao.LocationAddressDAO;
+import com.home.exception.RegistrationException;
+import com.home.model.LocationAddress;
+
+public class LocationAddressBO {
+
+	public LocationAddress getLocationAddress(final int user_id) throws RegistrationException {
+		final LocationAddressDAO loginDAO = new LocationAddressDAO();
+		LocationAddress location_address = null;
+		// System.out.println("location get being called");
+		try {
+			System.out.print(user_id);
+			location_address = loginDAO.getLocationAddress(user_id);
+
+		} catch (RegistrationException e) {
+			throw new RegistrationException(e.getMessage());
+		}
+		return location_address;
+	}
+
+	public LocationAddress getOneLocationAddress(final int user_id, final int location_id)
+			throws RegistrationException {
+
+		final LocationAddressDAO loginDAO = new LocationAddressDAO();
+		LocationAddress location_address = null;
+		System.out.println("location get being called");
+		try {
+			System.out.print(user_id);
+			location_address = loginDAO.getOneLocationAddress(user_id, location_id);
+
+		} catch (RegistrationException e) {
+			throw new RegistrationException(e.getMessage());
+		}
+		return location_address;
+	}
+
+	public int getLocationId(int user_id) throws RegistrationException {
+		int locationId = 0;
+		final LocationAddressDAO location_addressDAO = new LocationAddressDAO();
+		// System.out.println("getting auto generated location id");
+		try {
+			locationId = location_addressDAO.getLocationid(user_id);
+			// System.out.println("from Bo "+locationId);
+		} catch (RegistrationException e) {
+			throw new RegistrationException(e.getMessage());
+		}
+		return locationId;
+	}
+
+	public void saveLocationAddress(final LocationAddress location_address) throws RegistrationException {
+		// System.out.println("location save is called BO");
+		final LocationAddressDAO location_addressDAO = new LocationAddressDAO();
+		// System.out.println("location save being called");
+		try {
+			location_addressDAO.saveLocationAddress(location_address);
+		} catch (RegistrationException e) {
+			e.getStackTrace();
+			throw new RegistrationException(e.getMessage());
+		}
+	}
+
+	public static void main(String[] args) throws RegistrationException {
+		// TODO Auto-generated method stub
+		LocationAddressBO o = new LocationAddressBO();
+		// o.getLocationAddress(1);
+	}
+
+}

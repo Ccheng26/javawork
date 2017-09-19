@@ -1,0 +1,17 @@
+package JavaAssignment_JDBC;
+
+import java.util.Date;
+
+public class Employee {
+	String firstName,lastName;
+	Date timeIn,timeOut;
+	int employeeNumber;
+	Employee(String firstName, String lastName){
+		this.firstName= firstName;
+		this.lastName= lastName;
+	}
+	void createNewEmployee() {
+		
+	}
+	
+}

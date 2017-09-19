@@ -1,0 +1,57 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page import="com.home.model.*" %>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Location</title>
+</head>
+<body>
+
+<% 
+	Users user = (Users)session.getAttribute("user");	
+%>
+
+<div class="formcontainer">
+		<div class="leftpicture">
+			<img class="stockphoto1" style="width:300px" alt="home" src="http://www.leisepropertyservices.com/wp-content/uploads/2014/12/selling-your-home-cedar-shingle-home11.jpg">
+		</div>
+		<div class="loginformsection">
+
+  <form action="LocationServlet?action=save" method="post"> 
+		<label>Residence Type<span class="asterisk">*</span></label><br/>
+		<input type="hidden" name="user_id" value=<%= user.getUserId() %> />
+		<select name="residence_type">
+		  <option value="Single-Family Home">Single-Family Home</option>
+		  <option value="Condo">Condo</option>
+		  <option value="Townhouse">Townhouse</option>
+		  <option value="Rowhouse">Rowhouse</option>
+		  <option value="Duplex">Duplex</option>
+		  <option value="Apartment">Apartment</option>
+		</select><br/>
+		
+		<label>Address Line1<span class="asterisk">*</span></label><br/>
+		<input type="text" name="address_line1"/><br/>
+		<label>Address Line2</label><br/>
+		<input type="text" name="address_line2"/><br/>
+		<label>State<span class="asterisk">*</span></label><br/>
+		<input type="text" name="state"/><br/>
+		<label>City<span class="asterisk">*</span></label><br/>
+		<input type="text" name="city"/><br/>
+		<label>Zip<span class="asterisk">*</span></label><br/>
+		<input type="text" name="zip"/><br/>
+		
+		<label>Residence Use<span class="asterisk">*</span></label><br/>
+		<select name="residence_use">
+		  <option value="Primary">primary</option>
+		  <option value="Secondary">secondary</option>
+		  <option value="Rental">rental</option>
+		</select><br/>
+		
+		<input type="submit" name="continue" value="continue"/>
+	</form>
+	</div>
+   </div>
+</body>
+</html>

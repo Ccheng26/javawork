@@ -1,0 +1,27 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+ <!-- this allow this front controller to handle the url and resolver
+ where to send the request base on the url name -->
+ <bean	id="HandlerMapping"  class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"/>
+
+	<!-- this maps any url pattern to welcome.html to the class specified -->
+ <bean name="/welcome.html" class="com.hellocontroller.HelloController" />
+
+
+<!--  this searches for the view to display after the controller .java class
+ has return the request back here to the front controller -->
+ <bean id="viewResolver"
+    	class="org.springframework.web.servlet.view.InternalResourceViewResolver" >
+        <property name="prefix">
+            <value>/WEB-INF/</value>
+        </property>
+        <property name="suffix">
+            <value>.jsp</value>
+        </property>
+ </bean>
+
+
+</beans>

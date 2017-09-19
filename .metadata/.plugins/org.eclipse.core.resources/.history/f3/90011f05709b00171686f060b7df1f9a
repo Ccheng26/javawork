@@ -1,0 +1,96 @@
+package com.home.model;
+
+public class PolicyDetails {
+	
+	private int user_id;
+	private int policy_id;
+	private int quote_id;
+	private String policy_start;
+	private String policy_end;
+	private int policy_term;
+	private String policy_status;
+	/**
+	 * @return the user_id
+	 */
+	public int getUserId() {
+		return user_id;
+	}
+	/**
+	 * @param user_id the user_id to set
+	 */
+	public void setUserId(int user_id) {
+		this.user_id = user_id;
+	}
+	/**
+	 * @return the policy_id
+	 */
+	public int getPolicyId() {
+		return policy_id;
+	}
+	/**
+	 * @param policy_id the policy_id to set
+	 */
+	public void setPolicyId(int policy_id) {
+		this.policy_id = policy_id;
+	}
+	/**
+	 * @return the quote_id
+	 */
+	public int getQuoteId() {
+		return quote_id;
+	}
+	/**
+	 * @param quote_id the quote_id to set
+	 */
+	public void setQuoteId(int quote_id) {
+		this.quote_id = quote_id;
+	}
+	/**
+	 * @return the policy_start
+	 */
+	public String getPolicyStart() {
+		return policy_start;
+	}
+	/**
+	 * @param policy_start the policy_start to set
+	 */
+	public void setPolicyStart(String policy_start) {
+		this.policy_start = policy_start;
+	}
+	/**
+	 * @return the policy_end
+	 */
+	public String getPolicyEnd() {
+		return policy_end;
+	}
+	/**
+	 * @param policy_end the policy_end to set
+	 */
+	public void setPolicyEnd(String policy_end) {
+		this.policy_end = policy_end;
+	}
+	/**
+	 * @return the policy_term
+	 */
+	public int getPolicyTerm() {
+		return policy_term;
+	}
+	/**
+	 * @param policy_term the policy_term to set
+	 */
+	public void setPolicyTerm(int policy_term) {
+		this.policy_term = policy_term;
+	}
+	/**
+	 * @return the policy_status
+	 */
+	public String getPolicyStatus() {
+		return policy_status;
+	}
+	/**
+	 * @param policy_status the policy_status to set
+	 */
+	public void setPolicyStatus(String policy_status) {
+		this.policy_status = policy_status;
+	}
+}

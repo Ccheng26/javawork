@@ -1,0 +1,114 @@
+package com.home.servlet;
+
+import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.home.bo.HomeownerBO;
+import com.home.bo.PropertyDetailBO;
+import com.home.model.Homeowners;
+import com.home.model.PropertyDetails;
+import com.home.util.RegUserConstants;
+
+/**
+ * Servlet implementation class Property
+ */
+@WebServlet("/PropertyServlet")
+public class PropertyServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		
+				try {
+					
+					String action = request.getParameter("action");
+					final HttpSession session = request.getSession();
+					if(session.getAttribute("user") != null ) {
+						if( "save".equals(action)) {
+							System.out.println("inside the propertyservlet save");
+							
+							int location_id = Integer.parseInt(request.getParameter("location_id"));
+							int user_id= Integer.parseInt(request.getParameter("user_id"));
+							System.out.println(location_id);
+							int market_value = Integer.parseInt(request.getParameter("market_value"));
+							System.out.println(market_value);
+							int year_built = Integer.parseInt(request.getParameter("year_built"));
+							System.out.println(year_built);
+							double sqft =Double.parseDouble(request.getParameter("sqft"));
+							System.out.println(sqft);
+							String dwell_style = request.getParameter("dwell_style");
+							System.out.println(dwell_style);
+							String roof_material = request.getParameter("roof_material");
+							System.out.println(roof_material);
+							String garage_type = request.getParameter("garage_type");
+							System.out.println(garage_type);
+							int num_full_bath = Integer.parseInt(request.getParameter("num_full_bath"));
+							System.out.println(num_full_bath);
+							int num_half_bath = Integer.parseInt(request.getParameter("num_half_bath"));					
+							System.out.println(num_half_bath);
+							String has_pool = request.getParameter("has_pool");
+							System.out.println(has_pool);
+							System.out.println(user_id+  " " +location_id+" "+ market_value+" "+ year_built+" "+sqft+" "+dwell_style+" "+roof_material+" "+garage_type+" "+num_full_bath+" "+ num_half_bath +" "+ has_pool);
+							
+							PropertyDetails property = new PropertyDetails();
+							property.setUserId(user_id);
+							property.setLocationId(location_id);
+							property.setMarketValue(market_value);
+							property.setYearBuilt(year_built);
+							property.setSqft(sqft);
+							property.setDwellStyle(dwell_style);
+							property.setRoofMaterial(roof_material);
+							property.setGarageType(garage_type);
+							property.setNumFullBath(num_full_bath);
+							property.setNumHalfBath(num_half_bath);
+							property.setHasPool(has_pool);
+							PropertyDetailBO propertyBO = new PropertyDetailBO();
+							propertyBO.saveProperty(property);
+<<<<<<< HEAD
+
+							final RequestDispatcher dispatcher = request.getRequestDispatcher(RegUserConstants.QUOTEDETAILSERVLET);
+=======
+							final RequestDispatcher dispatcher = request.getRequestDispatcher("coveragedetails.jsp");
+>>>>>>> 8d719ba617527339486b7eadf81d2832671b4974
+							dispatcher.forward(request, response);
+						}
+						
+					}
+//					}
+//					else if ("gethomeowner".equals(action)){
+//						String f_name = request.getParameter("f_name");
+//						String l_name = request.getParameter("l_name");
+//						String password = request.getParameter("password");
+//						StudentBO studentBO = new StudentBO();
+//						Homeowners student = studentBO.getStudent(f_name);
+//						
+//						if(student != null && password.equals(student.getPassword())){
+//							session.setAttribute("username", f_name);
+//							session.setAttribute("student", student);
+//							final RequestDispatcher dispatcher = request.getRequestDispatcher(RegStuConstants.RegisterToCourse);
+//							dispatcher.forward(request, response);
+//						}
+						
+//					}
+					
+					}
+					catch (Exception e) {
+						
+						request.setAttribute("message", e.getMessage());
+						final RequestDispatcher dispatcher = request.getRequestDispatcher(RegUserConstants.ERROR);
+						dispatcher.forward(request, response);
+					}
+			
+	}
+
+}

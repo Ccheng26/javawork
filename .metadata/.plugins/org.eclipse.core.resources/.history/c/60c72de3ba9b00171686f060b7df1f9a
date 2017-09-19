@@ -1,0 +1,44 @@
+package com.home.bo;
+
+import com.home.dao.UserDAO;
+import com.home.exception.RegistrationException;
+import com.home.model.Users;
+
+//get user and return user
+//query by string
+//userDAO makes connection and queries database
+public class UserBO {
+	public Users getUser(final String userName) throws RegistrationException{
+
+		final UserDAO loginDAO = new UserDAO();
+		Users user = null;
+		try
+		{	
+			user = loginDAO.getUser(userName);
+		}
+		catch(RegistrationException e)
+		{
+			throw new RegistrationException(e.getMessage());
+		}
+		return user;
+	}
+	
+	public void registerUser(final Users user) throws RegistrationException{
+
+		final UserDAO userDAO = new UserDAO();
+		try
+		{
+			userDAO.saveUser(user);
+			
+		}
+		catch(RegistrationException e)
+		{
+			throw new RegistrationException(e.getMessage());
+		}
+	}
+	
+	public static void main(String[] args) throws RegistrationException {
+		UserBO o = new UserBO();
+//		o.getUser("hi");
+	}
+}

@@ -1,0 +1,29 @@
+package com.home.util;
+
+public class OracleSqlQueries {
+	//Queries to save form information
+	public static final String SAVE_USER = "INSERT INTO home_users(username, username_password, account_type) values(?, ?, ?)";
+	public static final String SAVE_LOCATION = "INSERT INTO location_add (user_id, residence_type, address_line1, address_line2, location_city, location_state, location_zip, residence_use) values(?, ?, ?, ?, ?, ?, ?, ?)";
+	public static final String SAVE_HOMEOWNER = "INSERT INTO homeowners (user_id, location_id,first_name,last_name, dob, retired ,ssn ,email) VALUES ( ?, ?, ?, ?, ?, ?,?,?)";
+	public static final String SAVE_PROPERTY_DETAILS = "INSERT INTO property_details (user_id, location_id, market_value, year_built, sqft, dwell_style, roof_material, garage_type, num_full_bath, num_half_bath, has_pool) values(?, ?, ?, ?, ?, ?, ?,?,?,?,?)";
+	public static final String SAVE_POLICY_DETAILS = "INSERT INTO policy_details (user_id, quote_id,location_id, policy_effective, policy_end, policy_term, policy_status) values(?, ?, ?, ?, ?, ?, ?)";
+	public static final String SAVE_QUOTE_DETAILS = "INSERT INTO quote_details ( location_id, user_id ,monthly_premium ,dwelling_coverage ,detached_structures,personal_property ,adtl_living_exp ,med_exp,deductible ,issue_date) values(?, ?, ?, ?, ?, ?, ?,?,?,?)";
+	public static final String FIND_USER = "SELECT user_id FROM home_users WHERE user_id-?";
+	//validation checks
+	
+	public static final String SELECT_HOMEOWNER = "SELECT * FROM homeowners WHERE user_id=?";
+	public static final String SELECT_ONE_HOMEOWNER = "SELECT * FROM homeowners WHERE user_id=? and location_id=?";
+	public static final String SELECT_USER_LOGIN = "SELECT * FROM home_users WHERE username=?";
+	public static final String SELECT_PROPERTY = "SELECT * FROM property_details WHERE location_id=?";
+	public static final String SELECT_ONE_PROPERTY = "SELECT * FROM property_details WHERE user_id=? and location_id=?";
+	public static final String SELECT_LOCATION_ADDRESS = "SELECT * FROM location_add WHERE user_id=?";
+	public static final String SELECT_ONE_LOCATION_ADDRESS = "SELECT * FROM location_add WHERE user_id=? and location_id=?";
+	public static final String SELECT_POLICY_DETAILS="SELECT * FROM policy_details WHERE user_id=?";
+	public static final String SELECT_QUOTE = "SELECT * FROM quote_details WHERE user_id=?";
+	
+	
+	public static final String CANCEL_POLICY_DETAILS = "UPDATE policy_details SET policy_status = 'INACTIVE' WHERE policy_id = ?";
+	public static final String RENEW_POLICY_DETAILS = "UPDATE policy_details SET policy_status = 'ACTIVE' WHERE policy_id = ?";
+	public static final String GET_GENERATED_ID = "select max(LOCATION_ID) as LOCATION_ID from location_add where user_id= ?";
+	
+}

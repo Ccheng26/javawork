@@ -1,0 +1,17 @@
+package second.junit;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class MyMainTest {
+
+	@Test
+	public void test() {
+		//assert value and name of function
+		//JUnitLesson juni= new JUnitLesson();
+		//assertEquals("Connie",juni.myName());
+		//name of test is included in class
+	}
+
+}

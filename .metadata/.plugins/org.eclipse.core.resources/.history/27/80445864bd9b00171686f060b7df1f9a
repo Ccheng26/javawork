@@ -1,0 +1,74 @@
+package com.home.servlet;
+
+import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.home.bo.PolicyDetailsBO;
+import com.home.model.PolicyDetails;
+import com.home.util.RegUserConstants;
+
+@WebServlet("/PolicyDetailServlet")
+public class PolicyDetailServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		try {
+			
+			String action = request.getParameter("action");
+			final HttpSession session = request.getSession();
+			if(session.getAttribute("user") != null ) {
+				
+				if( "save".equals(action)) {
+					System.out.println("inside the save");
+			
+					String location_id_string = request.getParameter(RegUserConstants.LOCATION_ID);
+					int location_id = Integer.parseInt(location_id_string);					
+					String user_id_string = request.getParameter(RegUserConstants.USER_ID);
+					int user_id= Integer.parseInt(user_id_string);
+					String policy_id_string = request.getParameter(RegUserConstants.POLICY_ID);
+					int policy_id= Integer.parseInt(policy_id_string);
+					String quote_id_string=request.getParameter(RegUserConstants.QUOTE_ID);
+					int quote_id= Integer.parseInt(quote_id_string);
+					String policy_start=request.getParameter(RegUserConstants.POLICY_START);
+					String policy_end=request.getParameter(RegUserConstants.POLICY_END);
+					String policy_term_string= request.getParameter(RegUserConstants.POLICY_TERM);
+					int policy_term=Integer.parseInt(policy_term_string);
+					
+					String policy_status=request.getParameter(RegUserConstants.POLICY_STATUS);
+					
+					PolicyDetails policy = new PolicyDetails();
+					policy.setUserId(user_id);
+					policy.setPolicyId(policy_id);
+					policy.setQuoteId(quote_id);
+					policy.setPolicyStart(policy_start);
+					policy.setPolicyEnd(policy_end);
+					policy.setPolicyTerm(policy_term);
+					policy.setPolicyStatus(policy_status);
+					PolicyDetailsBO policyBO = new PolicyDetailsBO();
+					policyBO.addPolicy(policy);
+
+					session.setAttribute("policy", policy);
+					final RequestDispatcher dispatcher = request.getRequestDispatcher("coverageDetails.jsp");
+					dispatcher.forward(request, response);
+				}			
+			}
+		} catch (Exception e) {
+				
+				request.setAttribute("message", e.getMessage());
+				final RequestDispatcher dispatcher = request.getRequestDispatcher(RegUserConstants.ERROR);
+				dispatcher.forward(request, response);
+		}
+	}
+}

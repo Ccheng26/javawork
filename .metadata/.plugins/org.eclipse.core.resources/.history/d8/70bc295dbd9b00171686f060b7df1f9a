@@ -1,0 +1,89 @@
+package com.home.servlet;
+
+import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.home.bo.*;
+import com.home.model.*;
+import com.home.util.RegUserConstants;
+
+/**
+ * Servlet implementation class QuoteDetailServlet
+ */
+@WebServlet("/QuoteDetailServlet")
+public class QuoteDetailServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("I'm in the Quote Detail servlet");
+		try {
+	
+			final HttpSession session = request.getSession();
+				if(session.getAttribute("user") != null ) {
+					//Users user = null;
+					//user = (Users)session.getAttribute("user");
+					int location_id = (int) session.getAttribute("locationId");
+					int user_id = (int) session.getAttribute("user");
+					
+					/*
+					 * we can use request object so info is taken then dies after request 
+					 * but since we need to constantly use location_id and user_id we set it in
+					 * session
+					 * if it was data that we didn't need throughout app
+					 * then we would need to remove it from that session after 
+                     *  we fetch it in next servlet otherwise our session will 
+                     * have useless data once the request is complete. Not only does 
+                     * this add overhead but it also makes your next servlet 
+                     * dependent on session tracking.
+					int val1 = (int) request.getAttribute("user_id");
+					int val2 = (int) request.getAttribute("location_id");
+					
+					In the Servlet before we would just set attributes send it with RequestDispatcher
+					 request.setAttribute("user_id", user_id);
+	                 request.setAttribute("location_id", location_id); 
+	                 
+	                 
+					*/
+					LocationAddressBO locationBO = new LocationAddressBO();
+					LocationAddress location_info = locationBO.getLocationAddress(user_id);
+					PropertyDetailBO property_detailsBO = new PropertyDetailBO();
+					PropertyDetails property_details = property_detailsBO.getLocationId(location_id);
+			
+					
+					
+					//System.out.println("before BO");
+					QuoteDetailBO quoteBO = new QuoteDetailBO();
+					quoteBO.saveQuote(property_details, location_info);
+					//System.out.println("after BO");
+					 //session.setAttribute("user", user);
+					 int locationId = location_info.getLocationId();
+					 session.setAttribute("locationId", locationId);
+					 System.out.println("I'm in quote servlet after BO" + locationId);
+					 QuoteDetails quote = quoteBO.getQuoteDetails(user_id);
+					final RequestDispatcher dispatcher = request.getRequestDispatcher(RegUserConstants.COVERAGEDETAILS);
+					 request.setAttribute("monthly_premium", quote.getMonthlyPremium());
+					 request.setAttribute("dwelling_coverage", quote.getDwellingCoverage());
+					 request.setAttribute("detached_structures", quote.getDetachedStructures());
+					 request.setAttribute("personal_property", quote.getPersonalProperty());
+					 request.setAttribute("med_exp", quote.getMedExp());
+					 request.setAttribute("add_living_expenses", quote.getLivingExpense());
+					 request.setAttribute("deductible", quote.getDeductible());
+					 request.setAttribute("issue_date", quote.getIssueDate());
+					dispatcher.forward(request, response);
+				}
+		}
+				catch (Exception e) {
+					
+					request.setAttribute("message", e.getMessage());
+					final RequestDispatcher dispatcher = request.getRequestDispatcher(RegUserConstants.ERROR);
+					dispatcher.forward(request, response);
+				}
+    }
+}

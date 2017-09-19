@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<BugCollection version="3.0.2-dev-20160306-90c514b" sequence="2" timestamp="1504887940781" analysisTimestamp="1504887940065" release="">
+  <Project projectName="CodingAnalysisBestPracticesAssignment">
+    <Jar>C:\Users\Connie\Desktop\Platform\homework\conniecheng-code-analysis-and-best-practices\CodingAnalysisBestPracticesAssignment\bin\nurseryRhymes</Jar>
+    <AuxClasspathEntry>C:\Users\Connie\Desktop\Platform\homework\conniecheng-code-analysis-and-best-practices\CodingAnalysisBestPracticesAssignment\bin</AuxClasspathEntry>
+    <AuxClasspathEntry>C:\Program Files\Java\jre1.8.0_121\lib\rt.jar</AuxClasspathEntry>
+    <SrcDir>C:\Users\Connie\Desktop\Platform\homework\conniecheng-code-analysis-and-best-practices\CodingAnalysisBestPracticesAssignment\src</SrcDir>
+    <Cloud id="edu.umd.cs.findbugs.cloud.doNothingCloud" online="false"></Cloud>
+  </Project>
+  <BugInstance type="DM_DEFAULT_ENCODING" priority="1" rank="19" abbrev="Dm" category="I18N" first="1">
+    <Class classname="nurseryRhymes.Main">
+      <SourceLine classname="nurseryRhymes.Main" sourcefile="Main.java" sourcepath="nurseryRhymes/Main.java"/>
+    </Class>
+    <Method classname="nurseryRhymes.Main" name="main" signature="([Ljava/lang/String;)V" isStatic="true">
+      <SourceLine classname="nurseryRhymes.Main" start="11" end="29" startBytecode="0" endBytecode="196" sourcefile="Main.java" sourcepath="nurseryRhymes/Main.java"/>
+    </Method>
+    <Method classname="java.io.InputStreamReader" name="&lt;init&gt;" signature="(Ljava/io/InputStream;)V" isStatic="false" role="METHOD_CALLED">
+      <SourceLine classname="java.io.InputStreamReader"/>
+    </Method>
+    <SourceLine classname="nurseryRhymes.Main" start="11" end="11" startBytecode="7" endBytecode="7" sourcefile="Main.java" sourcepath="nurseryRhymes/Main.java"/>
+    <SourceLine classname="nurseryRhymes.Main" start="11" end="11" startBytecode="7" endBytecode="7" sourcefile="Main.java" sourcepath="nurseryRhymes/Main.java"/>
+  </BugInstance>
+  <BugInstance type="NP_IMMEDIATE_DEREFERENCE_OF_READLINE" priority="2" rank="15" abbrev="NP" category="STYLE" first="1">
+    <Class classname="nurseryRhymes.Main">
+      <SourceLine classname="nurseryRhymes.Main" sourcefile="Main.java" sourcepath="nurseryRhymes/Main.java"/>
+    </Class>
+    <Method classname="nurseryRhymes.Main" name="main" signature="([Ljava/lang/String;)V" isStatic="true">
+      <SourceLine classname="nurseryRhymes.Main" start="11" end="29" startBytecode="0" endBytecode="196" sourcefile="Main.java" sourcepath="nurseryRhymes/Main.java"/>
+    </Method>
+    <SourceLine classname="nurseryRhymes.Main" start="21" end="21" startBytecode="27" endBytecode="27" sourcefile="Main.java" sourcepath="nurseryRhymes/Main.java"/>
+    <SourceLine classname="nurseryRhymes.Main" start="21" end="21" startBytecode="27" endBytecode="27" sourcefile="Main.java" sourcepath="nurseryRhymes/Main.java"/>
+  </BugInstance>
+  <BugInstance type="IL_INFINITE_LOOP" priority="1" rank="8" abbrev="IL" category="CORRECTNESS" first="1">
+    <Class classname="nurseryRhymes.oldMacdonald.Song">
+      <SourceLine classname="nurseryRhymes.oldMacdonald.Song" sourcefile="Song.java" sourcepath="nurseryRhymes/oldMacdonald/Song.java"/>
+    </Class>
+    <Method classname="nurseryRhymes.oldMacdonald.Song" name="&lt;init&gt;" signature="(Ljava/lang/String;)V" isStatic="false">
+      <SourceLine classname="nurseryRhymes.oldMacdonald.Song" start="29" end="49" startBytecode="0" endBytecode="264" sourcefile="Song.java" sourcepath="nurseryRhymes/oldMacdonald/Song.java"/>
+    </Method>
+    <SourceLine classname="nurseryRhymes.oldMacdonald.Song" start="37" end="37" startBytecode="56" endBytecode="56" sourcefile="Song.java" sourcepath="nurseryRhymes/oldMacdonald/Song.java"/>
+    <LocalVariable name="newAnimal" register="2" pc="56" role="LOCAL_VARIABLE_NAMED"/>
+    <SourceLine classname="nurseryRhymes.oldMacdonald.Song" start="36" end="36" startBytecode="37" endBytecode="37" sourcefile="Song.java" sourcepath="nurseryRhymes/oldMacdonald/Song.java"/>
+  </BugInstance>
+  <BugInstance type="MS_CANNOT_BE_FINAL" priority="2" rank="18" abbrev="MS" category="MALICIOUS_CODE" first="1">
+    <Class classname="nurseryRhymes.oldMacdonald.Song">
+      <SourceLine classname="nurseryRhymes.oldMacdonald.Song" sourcefile="Song.java" sourcepath="nurseryRhymes/oldMacdonald/Song.java"/>
+    </Class>
+    <Field classname="nurseryRhymes.oldMacdonald.Song" name="hasAnimal" signature="Z" isStatic="true">
+      <SourceLine classname="nurseryRhymes.oldMacdonald.Song" sourcefile="Song.java" sourcepath="nurseryRhymes/oldMacdonald/Song.java"/>
+    </Field>
+    <SourceLine classname="nurseryRhymes.oldMacdonald.Song" start="6" end="6" startBytecode="1" endBytecode="1" sourcefile="Song.java" sourcepath="nurseryRhymes/oldMacdonald/Song.java"/>
+  </BugInstance>
+  <BugInstance type="ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD" priority="1" rank="15" abbrev="ST" category="STYLE" first="1">
+    <Class classname="nurseryRhymes.oldMacdonald.Song">
+      <SourceLine classname="nurseryRhymes.oldMacdonald.Song" sourcefile="Song.java" sourcepath="nurseryRhymes/oldMacdonald/Song.java"/>
+    </Class>
+    <Method classname="nurseryRhymes.oldMacdonald.Song" name="&lt;init&gt;" signature="(Ljava/lang/String;)V" isStatic="false">
+      <SourceLine classname="nurseryRhymes.oldMacdonald.Song" start="29" end="49" startBytecode="0" endBytecode="264" sourcefile="Song.java" sourcepath="nurseryRhymes/oldMacdonald/Song.java"/>
+    </Method>
+    <Field classname="nurseryRhymes.oldMacdonald.Song" name="hasAnimal" signature="Z" isStatic="true">
+      <SourceLine classname="nurseryRhymes.oldMacdonald.Song" sourcefile="Song.java" sourcepath="nurseryRhymes/oldMacdonald/Song.java"/>
+    </Field>
+    <SourceLine classname="nurseryRhymes.oldMacdonald.Song" start="32" end="32" startBytecode="14" endBytecode="14" sourcefile="Song.java" sourcepath="nurseryRhymes/oldMacdonald/Song.java"/>
+    <SourceLine classname="nurseryRhymes.oldMacdonald.Song" start="32" end="32" startBytecode="14" endBytecode="14" sourcefile="Song.java" sourcepath="nurseryRhymes/oldMacdonald/Song.java"/>
+  </BugInstance>
+  <Errors errors="0" missingClasses="0"></Errors>
+  <FindBugsSummary timestamp="Fri, 8 Sep 2017 12:20:38 -0400" total_classes="3" referenced_classes="20" total_bugs="5" total_size="75" num_packages="2" java_version="1.8.0_121" vm_version="25.121-b13" cpu_seconds="2.66" clock_seconds="0.72" peak_mbytes="628.30" alloc_mbytes="1024.00" gc_seconds="0.07" priority_2="2" priority_1="3">
+    <PackageStats package="nurseryRhymes" total_bugs="2" total_types="1" total_size="13" priority_2="1" priority_1="1">
+      <ClassStats class="nurseryRhymes.Main" sourceFile="Main.java" interface="false" size="13" bugs="2" priority_2="1" priority_1="1"/>
+    </PackageStats>
+    <PackageStats package="nurseryRhymes.oldMacdonald" total_bugs="3" total_types="2" total_size="62" priority_2="1" priority_1="2">
+      <ClassStats class="nurseryRhymes.oldMacdonald.Chicken" sourceFile="Chicken.java" interface="false" size="5" bugs="0"/>
+      <ClassStats class="nurseryRhymes.oldMacdonald.Song" sourceFile="Song.java" interface="false" size="57" bugs="3" priority_2="1" priority_1="2"/>
+    </PackageStats>
+    <FindBugsProfile>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.ClassInfoAnalysisEngine" totalMilliseconds="180" invocations="351" avgMicrosecondsPerInvocation="513" maxMicrosecondsPerInvocation="50148" standardDeviationMircosecondsPerInvocation="2736"/>
+      <ClassProfile name="de.tobject.findbugs.builder.FindBugs2Eclipse" totalMilliseconds="156" invocations="2" avgMicrosecondsPerInvocation="78239" maxMicrosecondsPerInvocation="143852" standardDeviationMircosecondsPerInvocation="65612"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.ClassDataAnalysisEngine" totalMilliseconds="51" invocations="351" avgMicrosecondsPerInvocation="145" maxMicrosecondsPerInvocation="2317" standardDeviationMircosecondsPerInvocation="155"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FieldItemSummary" totalMilliseconds="32" invocations="20" avgMicrosecondsPerInvocation="1621" maxMicrosecondsPerInvocation="8206" standardDeviationMircosecondsPerInvocation="2057"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindNoSideEffectMethods" totalMilliseconds="30" invocations="20" avgMicrosecondsPerInvocation="1549" maxMicrosecondsPerInvocation="9473" standardDeviationMircosecondsPerInvocation="2467"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindDoubleCheck" totalMilliseconds="29" invocations="3" avgMicrosecondsPerInvocation="9958" maxMicrosecondsPerInvocation="29735" standardDeviationMircosecondsPerInvocation="13984"/>
+      <ClassProfile name="edu.umd.cs.findbugs.OpcodeStack$JumpInfoFactory" totalMilliseconds="26" invocations="82" avgMicrosecondsPerInvocation="317" maxMicrosecondsPerInvocation="1029" standardDeviationMircosecondsPerInvocation="260"/>
+      <ClassProfile name="edu.umd.cs.findbugs.util.TopologicalSort" totalMilliseconds="18" invocations="319" avgMicrosecondsPerInvocation="56" maxMicrosecondsPerInvocation="2075" standardDeviationMircosecondsPerInvocation="137"/>
+    </FindBugsProfile>
+  </FindBugsSummary>
+  <ClassFeatures></ClassFeatures>
+  <History>
+    <AppVersion sequence="0" timestamp="1504887940011" release="" codeSize="0" numClasses="0"/>
+    <AppVersion sequence="1" timestamp="1504887940023" release="" codeSize="75" numClasses="3"/>
+  </History>
+</BugCollection>

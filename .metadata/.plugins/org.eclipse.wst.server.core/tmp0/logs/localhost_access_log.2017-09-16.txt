@@ -1,0 +1,10 @@
+127.0.0.1 - - [16/Sep/2017:17:27:57 -0400] "GET / HTTP/1.1" 404 951
+0:0:0:0:0:0:0:1 - - [16/Sep/2017:17:28:00 -0400] "GET /HomeOwnerCaseStudy/ HTTP/1.1" 200 1864
+0:0:0:0:0:0:0:1 - - [16/Sep/2017:17:28:00 -0400] "GET /HomeOwnerCaseStudy/CSS/style.css HTTP/1.1" 200 1373
+0:0:0:0:0:0:0:1 - - [16/Sep/2017:17:28:27 -0400] "GET /HomeOwnerCaseStudy/newUser.jsp HTTP/1.1" 200 971
+0:0:0:0:0:0:0:1 - - [16/Sep/2017:17:28:33 -0400] "POST /HomeOwnerCaseStudy/UserServlet?action=register HTTP/1.1" 200 1864
+0:0:0:0:0:0:0:1 - - [16/Sep/2017:17:28:37 -0400] "POST /HomeOwnerCaseStudy/UserServlet?action=login HTTP/1.1" 200 1965
+0:0:0:0:0:0:0:1 - - [16/Sep/2017:17:28:48 -0400] "POST /HomeOwnerCaseStudy/LocationServlet?action=save HTTP/1.1" 200 1645
+0:0:0:0:0:0:0:1 - - [16/Sep/2017:17:28:48 -0400] "GET /HomeOwnerCaseStudy/CSS/style.css HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [16/Sep/2017:17:29:03 -0400] "POST /HomeOwnerCaseStudy/HomeownerServlet?action=save HTTP/1.1" 200 2456
+0:0:0:0:0:0:0:1 - - [16/Sep/2017:17:29:16 -0400] "POST /HomeOwnerCaseStudy/PropertyServlet?action=save HTTP/1.1" 200 294

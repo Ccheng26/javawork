@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;com.coginzant.inheritance_activity.InheritanceJava&apos; to &apos;InheritanceActivity&apos;&#x0D;&#x0A;- Original project: &apos;Homework&apos;&#x0D;&#x0A;- Original element: &apos;com.coginzant.inheritance_activity.InheritanceJava&apos;&#x0D;&#x0A;- Renamed element: &apos;com.coginzant.inheritance_activity.InheritanceActivity&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;InheritanceJava&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;com.coginzant.inheritance_activity{InheritanceJava.java[InheritanceJava" matchStrategy="1" name="InheritanceActivity" qualified="false" references="true" similarDeclarations="false" stamp="1503666091219" textual="false" version="1.0"/>
+</session>

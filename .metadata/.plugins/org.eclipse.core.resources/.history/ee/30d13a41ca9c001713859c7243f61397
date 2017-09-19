@@ -1,0 +1,62 @@
+package com.home.bo;
+
+import com.home.dao.HomeownerDAO;
+import com.home.exception.RegistrationException;
+import com.home.model.Homeowners;
+
+public class HomeownerBO {
+
+	public Homeowners getHomeOwner(final int user_id) throws RegistrationException {
+
+		final HomeownerDAO loginDAO = new HomeownerDAO();
+		Homeowners homeowner = null;
+		System.out.println("get homeowner route");
+		try {
+			homeowner = loginDAO.getHomeowner(user_id);
+			// cal here
+			// set to homeowner here
+		} catch (RegistrationException e) {
+
+			System.out.println("catch thrown for get");
+			throw new RegistrationException(e.getMessage());
+		}
+		return homeowner;
+	}
+
+	public Homeowners getOneHomeOwner(int user_id, int location_id) throws RegistrationException {
+		//System.out.println("get one homeowner route");
+		final HomeownerDAO loginDAO = new HomeownerDAO();
+		Homeowners homeowner = null;
+
+		try {
+			homeowner = loginDAO.getOneHomeowner(user_id, location_id);
+			// cal here
+			// set to homeowner here
+		} catch (RegistrationException e) {
+			e.printStackTrace();
+			//System.out.println("catch thrown for get");
+			throw new RegistrationException(e.getMessage());
+		}
+		return homeowner;
+	}
+
+	public void saveHomeowner(final Homeowners homeowner) throws RegistrationException {
+		System.out.println("save homeowner route");
+		final HomeownerDAO homeownerDAO = new HomeownerDAO();
+		try {
+			System.out.println("save homeowner try route");
+			homeownerDAO.saveHomeowner(homeowner);
+
+		} catch (RegistrationException e) {
+			System.out.println("reg excpetion");
+			throw new RegistrationException(e.getMessage());
+		}
+	}
+
+	public static void main(String[] args) throws RegistrationException {
+		// Homeowners o = new Homeowners();
+		// HomeownerBO oo= new HomeownerBO();
+		// oo.savehomeowner(o);
+	}
+
+}

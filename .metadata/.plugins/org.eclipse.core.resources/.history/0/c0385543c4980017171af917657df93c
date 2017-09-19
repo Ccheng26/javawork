@@ -1,0 +1,46 @@
+package com.home.bo;
+
+import com.home.dao.QuoteDetailDAO;
+import com.home.exception.RegistrationException;
+import com.home.model.*;
+
+//get user and return user
+//query by string
+//userDAO makes connection and queries database
+public class QuoteDetailBO {
+	public  QuoteDetails getQuoteDetails(final int user_id) throws RegistrationException{
+
+		final QuoteDetailDAO loginDAO = new QuoteDetailDAO();
+		QuoteDetails quote = null;
+		try
+		{	
+			quote = loginDAO.getQuoteDetails(user_id);
+		}
+		catch(RegistrationException e)
+		{
+			throw new RegistrationException(e.getMessage());
+		}
+		return quote;
+		
+	}
+	
+	public void saveQuote(final PropertyDetails homedetails, ) throws RegistrationException{
+		
+		
+		final QuoteDetailDAO quoteDAO = new QuoteDetailDAO();
+		try
+		{
+			quoteDAO.saveQuoteDetails(quote);
+			
+		}
+		catch(RegistrationException e)
+		{
+			throw new RegistrationException(e.getMessage());
+		}
+	}
+	
+	public static void main(String[] args) throws RegistrationException {
+		UserBO o = new UserBO();
+		o.getUser("hi");
+	}
+}

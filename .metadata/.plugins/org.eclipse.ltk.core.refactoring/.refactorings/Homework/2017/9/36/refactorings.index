@@ -1,0 +1,9 @@
+1504555701152	Move package
+1504729847081	Rename type 'A'
+1504729911272	Delete element
+1504730087805	Rename type 'B'
+1504730131163	Rename local variable 'x'
+1504730149127	Rename local variable 'y'
+1504730194110	Rename local variable 'z'
+1504730538160	Extract method 'pause'
+1504879357738	Delete element

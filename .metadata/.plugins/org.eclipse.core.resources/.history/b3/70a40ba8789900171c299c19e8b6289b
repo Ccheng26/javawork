@@ -1,0 +1,75 @@
+package com.home.servlet;
+
+import java.io.IOException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.home.bo.HomeownerBO;
+import com.home.bo.UserBO;
+import com.home.model.Homeowner;
+import com.home.model.Users;
+import com.home.util.RegUserConstants;
+
+
+
+@WebServlet("/UserServlet")
+public class UserServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		try {
+			String action = request.getParameter("action");
+			final HttpSession session = request.getSession();
+			if("register".equals(action)){
+				if(session.getAttribute("username") == null ) {
+					String username = request.getParameter("username");
+					String password = request.getParameter("password");
+					session.setAttribute("username", username);
+					
+					Users user = new Users();
+					user.setUsername(username);
+					//user.setPassword(password);
+					UserBO userBO = new UserBO();
+					userBO.registerUser(user);
+					session.setAttribute("user", user);
+					final RequestDispatcher dispatcher = request.getRequestDispatcher(RegUserConstants.REGISTER_TO_ACCOUNT);
+					dispatcher.forward(request, response);
+				}
+			}
+			else if ("login".equals(action)){
+				String username = request.getParameter("username");
+				String password = request.getParameter("password");
+				UserBO userBO = new UserBO();
+				//calling getUser fn in userBO; getUser fn calling sql query
+				Users user = userBO.getUser(username);
+				
+				if(username != null && password.equals(user.getPassword())){
+					session.setAttribute("username", username);
+					final RequestDispatcher dispatcher = request.getRequestDispatcher(RegUserConstants.LOGIN);
+					
+					dispatcher.forward(request, response);
+				}
+				
+			}
+			
+			}
+			catch (Exception e) {
+				
+				request.setAttribute("message", e.getMessage());
+				final RequestDispatcher dispatcher = request.getRequestDispatcher(RegUserConstants.ERROR);
+				dispatcher.forward(request, response);
+			}
+	}
+
+}

@@ -1,0 +1,79 @@
+package com.home.servlet;
+
+import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.home.bo.*;
+import com.home.model.*;
+import com.home.util.RegUserConstants;
+
+/**
+ * Servlet implementation class LocationServlet
+ */
+@WebServlet("/LocationServlet")
+public class LocationServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("I'm in the location servlet");
+		try {
+			
+			String action = request.getParameter("action");
+			final HttpSession session = request.getSession();
+			if("save".equals(action)){
+				if(session.getAttribute("user") != null ) {
+					Users user = null;
+					user = (Users)session.getAttribute("user");
+					String user_id_string = request.getParameter("user_id");
+					System.out.println("preFact "+user_id_string);
+					int user_id = Integer.parseInt(user_id_string);
+					System.out.println("preFact 2 "+user_id);
+					String residence_type = request.getParameter("residence_type");
+					String address_line1 = request.getParameter(RegUserConstants.ADDRESS_LINE1);
+					String address_line2 = request.getParameter(RegUserConstants.ADDRESS_LINE2);
+					String city = request.getParameter(RegUserConstants.CITY);
+					String state = request.getParameter(RegUserConstants.STATE);
+					String zip = request.getParameter(RegUserConstants.ZIP);
+					String residence_use = request.getParameter(RegUserConstants.RESIDENCE_USE);
+					System.out.println("preFact 3 "+user_id);
+					System.out.print(user_id + ' '+residence_type +' '+ address_line1+' ' + address_line2+' ' +city+' ' +state+' '+ zip+ ' '+residence_use);
+					System.out.println("preFact 4 "+user_id);
+					LocationAddress location = new LocationAddress();
+					location.setUserId(user_id);
+					location.setAddressLine1(address_line1);
+					location.setAddressLine2(address_line2);
+					location.setCity(city);
+					location.setResidenceType(residence_type);
+					location.setState(state);
+					location.setZip(zip);
+					location.setResidenceUse(residence_use);
+				
+					System.out.println("before BO");
+					LocationAddressBO locationBO = new LocationAddressBO();
+					locationBO.saveLocationAddress(location);
+					System.out.println("after BO");
+					session.setAttribute("user", user);
+					int locationId=locationBO.getLocationId(user_id);
+					System.out.println(locationId);
+					System.out.println("I'm in location servelt " + locationId);
+					session.setAttribute("locationId", locationId);
+					final RequestDispatcher dispatcher = request.getRequestDispatcher(RegUserConstants.HOMEOWNER);
+					dispatcher.forward(request, response);
+				}
+			}
+		}
+			catch (Exception e) {
+				
+				request.setAttribute("message", e.getMessage());
+				final RequestDispatcher dispatcher = request.getRequestDispatcher(RegUserConstants.ERROR);
+				dispatcher.forward(request, response);
+			}
+	}
+}

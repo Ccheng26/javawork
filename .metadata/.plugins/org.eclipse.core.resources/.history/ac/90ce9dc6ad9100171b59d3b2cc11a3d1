@@ -1,0 +1,40 @@
+package JavaAssignment_JDBC;
+import java.io.*; 
+import java.util.*;
+import java.sql.*;
+
+public class Main {
+	public static void main(String []args) throws SQLException {
+		Statement stmt=null;
+		try {
+			//register jdbc connection
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			String URL= "jdbc:oracle:thin:@localhost:1521:orcl";
+			//store properties
+			Properties info = new Properties();
+			info.put("user", "sys as SYSDBA");
+			info.put("password", "password123");
+			//establish connection
+			Connection conn = DriverManager.getConnection(URL,info);
+			System.out.print("Connected to jdbc");
+			
+			//storing createStatement in stmt
+			stmt=conn.createStatement();
+			//creating query here
+			String createEmpTable ="CREATE TABLE Employees("
+					+ "EmployeeNo NUMBER(10) NOT NULL PRIMARY KEY,"
+					+ "firstName VARCHAR(255),"
+					+ "lastName VARCHAR(255),"
+					+ "time_in VARCHAR(255),"
+					+ "time_out VARCHAR(255))";
+			//calling query here
+			stmt.execute(createEmpTable);
+			System.out.println("table created");
+			conn.close();
+		} catch(ClassNotFoundException ex) {
+			System.out.println("Error unable to load driver class!");
+			ex.printStackTrace();
+			System.exit(1);
+		}
+	}
+}

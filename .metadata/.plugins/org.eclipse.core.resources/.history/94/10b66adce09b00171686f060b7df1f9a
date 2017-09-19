@@ -1,0 +1,154 @@
+package com.home.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+
+import com.home.bo.LocationAddressBO;
+import com.home.bo.PropertyDetailBO;
+import com.home.bo.QuoteDetailBO;
+import com.home.exception.RegistrationException;
+import com.home.model.QuoteDetails;
+import com.home.util.OracleSqlQueries;
+import com.home.util.RegUserConstants;
+import com.home.model.PropertyDetails;
+import com.home.model.LocationAddress;
+
+public class QuoteDetailDAO {
+	private static java.sql.Date getCurrentDate() {
+		java.util.Date today = new java.util.Date();
+		return new java.sql.Date(today.getTime());
+	}
+
+	public QuoteDetails getQuoteDetails(final int user_id) throws RegistrationException {
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet resultSet = null;
+		QuoteDetails quote = null;
+
+		List<QuoteDetails> quoteList;
+		try {
+			final AbstractDAOFactory daoFactory = AbstractDAOFactory.getDaoFactory(RegUserConstants.ORACLE);
+			conn = daoFactory.getConnection();
+			stmt = conn.prepareStatement(OracleSqlQueries.SELECT_QUOTE);
+			stmt.setInt(1, user_id);
+			resultSet = stmt.executeQuery();
+
+			quoteList = new ArrayList<QuoteDetails>();
+			while (resultSet.next()) {
+				quote = new QuoteDetails();
+				quote.setQuoteId(resultSet.getInt(1));
+				quote.setLocationId(resultSet.getInt(2));
+				quote.setUserId(resultSet.getInt(3));
+				quote.setMonthlyPremium(resultSet.getDouble(4));
+				quote.setDwellingCoverage(resultSet.getDouble(5));
+				quote.setDetachedStructures(resultSet.getDouble(6));
+				quote.setPersonalProperty(resultSet.getDouble(7));
+				quote.setLivingExpense(resultSet.getDouble(8));
+				quote.setMedExp(resultSet.getDouble(9));
+				quote.setDeductible(resultSet.getDouble(10));
+				quote.setIssueDate(resultSet.getString(11));
+				quoteList.add(quote);
+				System.out.println("check monthly premium in dao " + quote.getMonthlyPremium());
+			}
+			System.out.println(quoteList.size());
+			for (QuoteDetails q : quoteList) {
+				System.out.println(q.getLivingExpense());
+
+			}
+			// System.out.println(quoteList.get(0).getMonthlyPremium());
+			// System.out.println(quoteList.get(1).getMonthlyPremium());
+			stmt.close();
+			// CourseBO courseBO = new CourseBO();
+			// student.setCourses(courseBO.getCourse(student.getStudent_id()));
+		} catch (SQLException e) {
+			throw new RegistrationException(e.getMessage());
+		} catch (Exception e) {
+			throw new RegistrationException(e.getMessage());
+		} finally {
+			try {
+				resultSet.close();
+				stmt.close();
+				conn.close();
+			} catch (SQLException e) {
+			}
+		}
+		return quote;
+	}
+
+
+
+	public void saveQuoteDetails(final QuoteDetails quote,final PropertyDetails property, final LocationAddress locale)
+			throws RegistrationException {
+		Connection conn = null;
+		PreparedStatement stmt = null;
+//		QuoteDetails quote = new QuoteDetails();
+		// Date date = new Date();
+		// SimpleDateFormat ft = new SimpleDateFormat("yyyy/MM/dd");
+		// String dateNow = ft.format(date);
+
+		try {
+			final AbstractDAOFactory daoFactory = AbstractDAOFactory.getDaoFactory(RegUserConstants.ORACLE);
+			conn = daoFactory.getConnection();
+			stmt = conn.prepareStatement(OracleSqlQueries.SAVE_QUOTE_DETAILS);
+			stmt.setInt(1, locale.getLocationId());
+			stmt.setInt(2, locale.getUserId());
+			stmt.setDouble(3, makeMonthlyPremium(property, locale));
+			stmt.setDouble(4, createDwellingCoverage(property)); // dwelling coverage see above
+			stmt.setDouble(5, 0.10 * createDwellingCoverage(property)); // detached structure
+			stmt.setDouble(6, 0.60 * createDwellingCoverage(property)); // personal property
+			stmt.setDouble(7, 0.20 * createDwellingCoverage(property)); // add living expense
+			stmt.setDouble(8, 5000.00);
+			stmt.setDouble(9, 0.01 * property.getMarketValue());
+			stmt.setDate(10, new java.sql.Date(quote.getIssueDate().getTime()));
+			// stmt.setString(10, dateNow);
+
+			stmt.executeUpdate();
+			stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new RegistrationException(e.getMessage());
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RegistrationException(e.getMessage());
+		} finally {
+			try {
+				stmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	public static void main(String[] args) throws RegistrationException, ParseException {
+//		LocationAddressBO loc = new LocationAddressBO();
+//		LocationAddress locale = loc.getLocationAddress(1);
+//
+//		PropertyDetailBO i = new PropertyDetailBO();
+//		PropertyDetails property = i.getLocationId(1);
+//		QuoteDetails o = new QuoteDetails();
+//		o.setQuoteId(1);
+//		o.setLocationId(1);
+//		o.setUserId(1);
+//		o.setMonthlyPremium(1000);
+//		o.setDwellingCoverage(10025);
+//		o.setDetachedStructures(50);
+//		o.setPersonalProperty(150);
+//		o.setLivingExpense(555);
+//		o.setMedExp(200);
+//		o.setDeductible(59);
+//		o.setIssueDate("1982-05-01");
+//		QuoteDetailDAO newq = new QuoteDetailDAO();
+//		newq.saveQuoteDetails(o,property, locale);
+		// loc.getQuoteDetails(2).getMonthlyPremium();
+	}
+
+}

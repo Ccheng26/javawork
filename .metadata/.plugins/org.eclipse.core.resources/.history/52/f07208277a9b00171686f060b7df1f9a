@@ -1,0 +1,8 @@
+driver=oracle.jdbc.driver.OracleDriver
+url=jdbc:oracle:thin:@localhost:1521:orcl
+<<<<<<< HEAD
+user=cctest
+=======
+user=esraa
+>>>>>>> 8d719ba617527339486b7eadf81d2832671b4974
+password=password123

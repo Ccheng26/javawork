@@ -1,0 +1,7 @@
+1504885468141	Rename type 'A'
+1504885751297	Rename local variable 'x'
+1504885782159	Rename local variable 'y'
+1504885824617	Rename local variable 'z'
+1504885893984	Rename type 'B'
+1504885912767	Rename method 'x'
+1504886566603	Extract method 'pause'

@@ -1,0 +1,72 @@
+package com.home.servlet;
+
+import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.home.bo.QuoteDetailBO;
+import com.home.model.QuoteDetails;
+import com.home.model.Users;
+import com.home.util.RegUserConstants;
+
+/**
+ * Servlet implementation class QuoteDetailsServlet
+ */
+@WebServlet("/QuoteDetailsServlet")
+public class QuoteDetailsServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		try {
+			
+			final HttpSession session = request.getSession();
+			if(session.getAttribute("user") != null ) {
+					System.out.println("inside the QuoteDetailsServlet save");
+					
+					
+					Users user = (Users)session.getAttribute("user");
+					int location_id = Integer.parseInt(session.getAttribute("locationId").toString());
+					
+					QuoteDetailBO quote_bo = new QuoteDetailBO();
+					quote_bo.saveQuote(locationId, user.getUserId());
+					quote_bo.getQuoteDetails(locationId, user.getUserId())(locationId, user.getUserId());
+					getQuoteDetails(user.getUserId(), location_id);
+					
+					PropertyDetails property = new PropertyDetails();
+					property.setUserId(user_id);
+					property.setLocationId(location_id);
+					property.setMarketValue(market_value);
+					property.setYearBuilt(year_built);
+					property.setSqft(sqft);
+					property.setDwellStyle(dwell_style);
+					property.setRoofMaterial(roof_material);
+					property.setGarageType(garage_type);
+					property.setNumFullBath(num_full_bath);
+					property.setNumHalfBath(num_half_bath);
+					property.setHasPool(has_pool);
+					PropertyDetailBO propertyBO = new PropertyDetailBO();
+					propertyBO.saveProperty(property);
+					final RequestDispatcher dispatcher = request.getRequestDispatcher(RegUserConstants.COVERAGEDETAILS);
+					dispatcher.forward(request, response);
+				
+			}
+			
+			}
+			catch (Exception e) {
+				
+				request.setAttribute("message", e.getMessage());
+				final RequestDispatcher dispatcher = request.getRequestDispatcher(RegUserConstants.ERROR);
+				dispatcher.forward(request, response);
+			}
+	}
+
+}

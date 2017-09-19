@@ -1,0 +1,151 @@
+package com.home.model;
+
+public class PropertyDetails {
+
+	private int location_id;
+	private int user_id;
+	private int market_value;
+	private int year_built;
+	private double sqft;
+	private String dwell_style;
+	private String roof_material;
+	private String garage_type;
+	private int num_full_bath ;
+	private int num_half_bath ;
+	private String has_pool ;
+	/**
+	 * @return the user_id
+	 */
+	public int getUserId() {
+		return user_id;
+	}
+	/**
+	 * @param user_id the user_id to set
+	 */
+	public void setUserId(int user_id) {
+		this.user_id = user_id;
+	}
+	
+	
+	
+	/**
+	 * @return the location_id
+	 */
+	public int getLocationId() {
+		return location_id;
+	}
+	/**
+	 * @param location_id the location_id to set
+	 */
+	public void setLocationId(int location_id) {
+		this.location_id = location_id;
+	}
+	/**
+	 * @return the market_value
+	 */
+	public int getMarketValue() {
+		return market_value;
+	}
+	/**
+	 * @param market_value the market_value to set
+	 */
+	public void setMarketValue(int market_value) {
+		this.market_value = market_value;
+	}
+	/**
+	 * @return the year_built
+	 */
+	public int getYearBuilt() {
+		return year_built;
+	}
+	/**
+	 * @param year_built the year_built to set
+	 */
+	public void setYearBuilt(int year_built) {
+		this.year_built = year_built;
+	}
+	/**
+	 * @return the sqft
+	 */
+	public double getSqft() {
+		return sqft;
+	}
+	/**
+	 * @param sqft the sqft to set
+	 */
+	public void setSqft(double sqft) {
+		this.sqft = sqft;
+	}
+	/**
+	 * @return the dwell_style
+	 */
+	public String getDwellStyle() {
+		return dwell_style;
+	}
+	/**
+	 * @param dwell_style the dwell_style to set
+	 */
+	public void setDwellStyle(String dwell_style) {
+		this.dwell_style = dwell_style;
+	}
+	/**
+	 * @return the roof_material
+	 */
+	public String getRoofMaterial() {
+		return roof_material;
+	}
+	/**
+	 * @param roof_material the roof_material to set
+	 */
+	public void setRoofMaterial(String roof_material) {
+		this.roof_material = roof_material;
+	}
+	/**
+	 * @return the garage_type
+	 */
+	public String getGarageType() {
+		return garage_type;
+	}
+	/**
+	 * @param garage_type the garage_type to set
+	 */
+	public void setGarageType(String garage_type) {
+		this.garage_type = garage_type;
+	}
+	/**
+	 * @return the num_full_bath
+	 */
+	public int getNumFullBath() {
+		return num_full_bath;
+	}
+	/**
+	 * @param num_full_bath the num_full_bath to set
+	 */
+	public void setNumFullBath(int num_full_bath) {
+		this.num_full_bath = num_full_bath;
+	}
+	/**
+	 * @return the num_half_bath
+	 */
+	public int getNumHalfBath() {
+		return num_half_bath;
+	}
+	/**
+	 * @param num_half_bath the num_half_bath to set
+	 */
+	public void setNumHalfBath(int num_half_bath) {
+		this.num_half_bath = num_half_bath;
+	}
+	/**
+	 * @return the has_pool
+	 */
+	public String getHasPool() {
+		return has_pool;
+	}
+	/**
+	 * @param has_pool the has_pool to set
+	 */
+	public void setHasPool(String has_pool) {
+		this.has_pool = has_pool;
+	}
+}

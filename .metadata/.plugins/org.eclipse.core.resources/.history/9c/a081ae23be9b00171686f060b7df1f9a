@@ -1,0 +1,78 @@
+package com.home.bo;
+
+import com.home.dao.PolicyDetailsDAO;
+import com.home.exception.RegistrationException;
+import com.home.model.PolicyDetails;
+
+public class PolicyDetailsBO extends QuoteDetailBO{
+
+	public PolicyDetails getPolicyDetail(final int location_id) throws RegistrationException{
+
+		final PolicyDetailsDAO policy_details_DAO = new PolicyDetailsDAO();
+		PolicyDetails policy_detail = null;
+		try
+		{	
+			policy_detail = policy_details_DAO.getPolicyDetails(location_id);
+		}
+		catch(RegistrationException e)
+		{
+			throw new RegistrationException(e.getMessage());
+		}
+		return policy_detail;
+	}
+	
+	public void addPolicy(final PolicyDetails policy_detail) throws RegistrationException{
+
+		final PolicyDetailsDAO policy_details_DAO = new PolicyDetailsDAO();
+		try
+		{
+			policy_details_DAO.savePolicyDetails(policy_detail);
+			
+		}
+		catch(RegistrationException e)
+		{
+			throw new RegistrationException(e.getMessage());
+		}
+		
+	}
+	
+	public void cancelPolicy(final int policy_id) throws RegistrationException{
+
+			final PolicyDetailsDAO policy_details_DAO = new PolicyDetailsDAO();
+			try
+			{
+				policy_details_DAO.cancelPolicyDetails(policy_id);
+				
+			}
+			catch(RegistrationException e)
+			{
+				throw new RegistrationException(e.getMessage());
+			}	
+	}
+	
+	public void renewPolicy(final int policy_id) throws RegistrationException{
+
+		final PolicyDetailsDAO policy_details_DAO = new PolicyDetailsDAO();
+		try
+		{
+			policy_details_DAO.renewPolicyDetails(policy_id);
+			
+		}
+		catch(RegistrationException e)
+		{
+			throw new RegistrationException(e.getMessage());
+		}	
+
+	}
+
+	
+	
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}
+
+	

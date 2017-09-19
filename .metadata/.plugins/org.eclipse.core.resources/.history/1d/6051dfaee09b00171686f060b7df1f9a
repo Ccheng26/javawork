@@ -1,0 +1,57 @@
+package com.home.bo;
+
+import com.home.dao.QuoteDetailDAO;
+import com.home.exception.RegistrationException;
+import com.home.model.*;
+
+//get user and return user
+//query by string
+//userDAO makes connection and queries database
+public class QuoteDetailBO {
+	public QuoteDetails getQuoteDetails(final int user_id) throws RegistrationException {
+
+		final QuoteDetailDAO loginDAO = new QuoteDetailDAO();
+		QuoteDetails quote = null;
+		try {
+			quote = loginDAO.getQuoteDetails(user_id);
+		} catch (RegistrationException e) {
+			throw new RegistrationException(e.getMessage());
+		}
+		return quote;
+
+	}
+
+	public void saveQuote(final QuoteDetails quote, final PropertyDetails property, final LocationAddress locale)
+			throws RegistrationException {
+		/**
+		 * System.out.println(quoteList.size()); for(LocationAddress l : locDetails ) {
+		 * System.out.println(locDetails.getResidenceType());
+		 **/
+		final QuoteDetailDAO quoteDAO = new QuoteDetailDAO();
+		try {
+			quoteDAO.saveQuoteDetails(quote, property, locale);
+
+		} catch (RegistrationException e) {
+			throw new RegistrationException(e.getMessage());
+		}
+	}
+
+	public static void main(String[] args) throws RegistrationException {
+
+		// LocationAddressBO loc = new LocationAddressBO();
+		// LocationAddress locale = loc.getLocationAddress(1);
+		//
+		// PropertyDetailBO o = new PropertyDetailBO();
+		// PropertyDetails property = o.getLocationId(1);
+		// System.out.println(o.getLocationId(1).getDwellStyle());
+		// System.out.println(o.getLocationId(1).getGarageType());
+		// System.out.println(o.getLocationId(1).getHasPool());
+		// System.out.println(o.getLocationId(1).getMarketValue());
+		// QuoteDetailBO oo = new QuoteDetailBO();
+		// System.out.println("property is "+ property.getMarketValue()+ "locale is" +
+		// locale.getLocationId());
+		// oo.saveQuote(property, locale);
+		// oo.saveQuote(quote, o.getLocationId(1), loc.getLocationAddressr(1));
+
+	}
+}

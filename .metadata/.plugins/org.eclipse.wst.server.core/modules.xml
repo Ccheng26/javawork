@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<modules>
+  <module moduleId="org.eclipse.jst.jee.server:FilterResponseDemo"/>
+  <module moduleId="org.eclipse.jst.jee.server:FirstDynamicPage" serverId="Tomcat v7.0 Server at localhost"/>
+  <module moduleId="org.eclipse.jst.jee.server:HomeOwnerCaseStudy" serverId="Tomcat v7.0 Server at localhost"/>
+  <module moduleId="org.eclipse.jst.jee.server:SecondDyamicProject" serverId="Tomcat v7.0 Server at localhost"/>
+  <module moduleId="org.eclipse.jst.jee.server:HandsOn-ServletFilteringCaseStudy" serverId="Tomcat v7.0 Server at localhost"/>
+</modules>

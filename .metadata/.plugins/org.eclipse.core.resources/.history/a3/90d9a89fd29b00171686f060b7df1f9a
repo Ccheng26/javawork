@@ -1,0 +1,188 @@
+package com.home.model;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class QuoteDetails {
+
+	private int quote_id;
+	private int location_id;
+	private int user_id;
+	private double monthly_premium;
+	private double dwelling_coverage;
+	private double detached_structures;
+	private double personal_property;
+	private double adtl_living_exp;
+	private double med_exp;
+	private double deductible;
+	private Date issue_date;
+
+	/**
+	 * @return the quote_id
+	 */
+	public int getQuoteId() {
+		return quote_id;
+	}
+
+	/**
+	 * @param quote_id
+	 *            the quote_id to set
+	 */
+	public void setQuoteId(int quote_id) {
+		this.quote_id = quote_id;
+	}
+
+	/**
+	 * @return the location_id
+	 */
+	public int getLocationId() {
+		return location_id;
+	}
+
+	/**
+	 * @param location_id
+	 *            the location_id to set
+	 */
+	public void setLocationId(int location_id) {
+		this.location_id = location_id;
+	}
+
+	/**
+	 * @return the user_id
+	 */
+	public int getUserId() {
+		return user_id;
+	}
+
+	/**
+	 * @param user_id
+	 *            the user_id to set
+	 */
+	public void setUserId(int user_id) {
+		this.user_id = user_id;
+	}
+
+	/**
+	 * @return the monthly_premium
+	 */
+	public double getMonthlyPremium() {
+		return monthly_premium;
+	}
+
+	/**
+	 * @param monthly_premium
+	 *            the monthly_premium to set
+	 */
+	public void setMonthlyPremium(double monthly_premium) {
+		this.monthly_premium = monthly_premium;
+	}
+
+	/**
+	 * @return the dwelling_coverage
+	 */
+	public double getDwellingCoverage() {
+		return dwelling_coverage;
+	}
+
+	/**
+	 * @param dwelling_coverage
+	 *            the dwelling_coverage to set
+	 */
+	public void setDwellingCoverage(double dwelling_coverage) {
+		this.dwelling_coverage = dwelling_coverage;
+	}
+
+	/**
+	 * @return the detached_structures
+	 */
+	public double getDetachedStructures() {
+		return detached_structures;
+	}
+
+	/**
+	 * @param detached_structures
+	 *            the detached_structures to set
+	 */
+	public void setDetachedStructures(double detached_structures) {
+		this.detached_structures = detached_structures;
+	}
+
+	/**
+	 * @return the personal_property
+	 */
+	public double getPersonalProperty() {
+		return personal_property;
+	}
+
+	/**
+	 * @param personal_property
+	 *            the personal_property to set
+	 */
+	public void setPersonalProperty(double personal_property) {
+		this.personal_property = personal_property;
+	}
+
+	/**
+	 * @return the adtl_living_exp
+	 */
+	public double getLivingExpense() {
+		return adtl_living_exp;
+	}
+
+	/**
+	 * @param adtl_living_exp
+	 *            the adtl_living_exp to set
+	 */
+	public void setLivingExpense(double adtl_living_exp) {
+		this.adtl_living_exp = adtl_living_exp;
+	}
+
+	/**
+	 * @return the med_exp
+	 */
+	public double getMedExp() {
+		return med_exp;
+	}
+
+	/**
+	 * @param med_exp
+	 *            the med_exp to set
+	 */
+	public void setMedExp(double med_exp) {
+		this.med_exp = med_exp;
+	}
+
+	/**
+	 * @return the deductible
+	 */
+	public double getDeductible() {
+		return deductible;
+	}
+
+	/**
+	 * @param deductible
+	 *            the deductible to set
+	 */
+	public void setDeductible(double deductible) {
+		this.deductible = deductible;
+	}
+
+	/**
+	 * @return the issue_date
+	 */
+	public Date getIssueDate() {
+		return issue_date;
+	}
+
+	/**
+	 * @param issue_date
+	 *            the issue_date to set
+	 * @throws ParseException 
+	 */
+	
+	public void setIssueDate(String issue_date) throws ParseException {
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		this.issue_date = (Date) formatter.parse(issue_date);
+	}
+}

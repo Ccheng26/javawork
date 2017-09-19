@@ -1,0 +1,177 @@
+package com.home.dao;
+
+import java.sql.*;
+import com.home.bo.HomeownerBO;
+import com.home.exception.RegistrationException;
+import com.home.model.Homeowners;
+import com.home.util.OracleSqlQueries;
+import com.home.util.RegUserConstants;
+
+public class HomeownerDAO {
+	public Homeowners getHomeOwner(final int user_id) throws RegistrationException
+	{
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet resultSet = null;
+		Homeowners homeowner = null;
+
+		try
+		{
+			final AbstractDAOFactory daoFactory = AbstractDAOFactory.getDaoFactory(RegUserConstants.ORACLE);
+			conn = daoFactory.getConnection();
+			stmt = conn.prepareStatement(OracleSqlQueries.SELECT_HOMEOWNER);
+			stmt.setInt(1, user_id);
+			resultSet = stmt.executeQuery();
+			if (resultSet.next()) {
+				homeowner = new Homeowners();
+				homeowner.setUserid(resultSet.getInt(1));
+				homeowner.setLocationid(resultSet.getInt(2));
+				homeowner.setFirstName(resultSet.getString(3));
+				homeowner.setLastName(resultSet.getString(4));
+				homeowner.setDOB(resultSet.getString(5));
+				homeowner.setRetired(resultSet.getString(6));
+				homeowner.setSSN(resultSet.getString(7));
+				homeowner.setEmailId(resultSet.getString(8));
+			}
+			System.out.println(homeowner.getFirstName());
+			stmt.close();
+			
+			//CourseBO courseBO = new CourseBO();
+			//student.setCourses(courseBO.getCourse(student.getStudent_id()));
+		}
+		catch (SQLException e)
+		{
+			throw new RegistrationException(e.getMessage());
+		}
+		catch(Exception e)
+		{
+			throw new RegistrationException(e.getMessage());
+		} 
+		finally
+		{
+			try
+			{
+				resultSet.close();
+				stmt.close();
+				conn.close();
+			}
+			catch (SQLException e)
+			{
+			}
+		}
+		return homeowner;
+	}
+	public void saveHomeowner(final Homeowners homeowener) throws RegistrationException
+	{
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		try
+		{
+			System.out.println(homeowener.getUserid()+ " "+ homeowener.getLocationid()+homeowener.getFirstName()+homeowener.getLastName()+ homeowener.getDOB()+homeowener.getRetired()+homeowener.getSSN()+homeowener.getEmailId());
+			final AbstractDAOFactory daoFactory = AbstractDAOFactory.getDaoFactory(RegUserConstants.ORACLE);
+			conn = daoFactory.getConnection();
+			stmt = conn.prepareStatement(OracleSqlQueries.SAVE_HOMEOWNER);
+			stmt.setInt(1, homeowener.getUserid());
+			stmt.setInt(2, homeowener.getLocationid());
+			stmt.setString(3, homeowener.getFirstName());
+			stmt.setString(4, homeowener.getLastName());
+			stmt.setString(5, homeowener.getDOB());
+			stmt.setString(6, homeowener.getRetired());
+			stmt.setString(7, homeowener.getSSN());
+			stmt.setString(8, homeowener.getEmailId());
+			
+			stmt.executeUpdate();
+			stmt.close();
+		}
+		catch (SQLException e)
+		{
+			throw new RegistrationException(e.getMessage());
+		}
+		catch(Exception e)
+		{
+			throw new RegistrationException(e.getMessage());
+		} 
+		finally
+		{
+			try
+			{
+				stmt.close();
+				conn.close();
+			}
+			catch (SQLException e)
+			{
+				
+			}
+		}
+	}
+	public Homeowners getoneHomeOwner(final int user_id , final int location_id) throws RegistrationException
+	{
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet resultSet = null;
+		Homeowners homeowner = null;
+
+		try
+		{
+			final AbstractDAOFactory daoFactory = AbstractDAOFactory.getDaoFactory(RegUserConstants.ORACLE);
+			conn = daoFactory.getConnection();
+			stmt = conn.prepareStatement(OracleSqlQueries.SELECT_ONE_HOMEOWNER);
+			stmt.setInt(1, user_id);
+			stmt.setInt(2, location_id);
+			resultSet = stmt.executeQuery();
+			if (resultSet.next()) {
+				homeowner = new Homeowners();
+				homeowner.setUserid(resultSet.getInt(1));
+				homeowner.setLocationid(resultSet.getInt(2));
+				homeowner.setFirstName(resultSet.getString(3));
+				homeowner.setLastName(resultSet.getString(4));
+				homeowner.setDOB(resultSet.getString(5));
+				homeowner.setRetired(resultSet.getString(6));
+				homeowner.setSSN(resultSet.getString(7));
+				homeowner.setEmailId(resultSet.getString(8));
+			}
+			System.out.println(homeowner.getFirstName());
+			stmt.close();
+			
+			//CourseBO courseBO = new CourseBO();
+			//student.setCourses(courseBO.getCourse(student.getStudent_id()));
+		}
+		catch (SQLException e)
+		{
+			throw new RegistrationException(e.getMessage());
+		}
+		catch(Exception e)
+		{
+			throw new RegistrationException(e.getMessage());
+		} 
+		finally
+		{
+			try
+			{
+				resultSet.close();
+				stmt.close();
+				conn.close();
+			}
+			catch (SQLException e)
+			{
+			}
+		}
+		return homeowner;
+	}
+	public static void main(String[] args) throws RegistrationException {
+		Homeowners o = new Homeowners();
+////		o.setUserid(2);
+////		o.setFirstName("abcd");
+////		o.setLastName("asfds");
+////		o.setDOB("8-6-1783");
+////		o.setRetired("yes");
+////		o.setSSN("123456798");
+////		o.setEmailId("asjfslkdj@fj.com");
+////		o.getHomeowner(2);
+		HomeownerDAO oo= new HomeownerDAO();
+		oo.getoneHomeOwner(0, 0);
+		System.out.println("homeowner get output: " oo.getoneHomeOwner(1, 1));
+		oo.saveHomeowner(o);
+	}
+
+}

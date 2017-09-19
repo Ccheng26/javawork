@@ -1,0 +1,270 @@
+package com.home.servlet;
+
+import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.home.bo.HomeownerBO;
+import com.home.bo.PropertyDetailBO;
+import com.home.model.Homeowners;
+import com.home.model.PropertyDetails;
+import com.home.util.RegUserConstants;
+
+<<<<<<< HEAD
+/**
+ * Servlet implementation class Property
+ */
+@WebServlet("/PropertyServlet")
+public class PropertyServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+=======
+		try
+		{
+			final AbstractDAOFactory daoFactory = AbstractDAOFactory.getDaoFactory(RegUserConstants.ORACLE);
+			conn = daoFactory.getConnection();
+			stmt = conn.prepareStatement(OracleSqlQueries.SELECT_PROPERTY);
+			stmt.setInt(1, location_id);
+			resultSet = stmt.executeQuery();
+			if (resultSet.next()) {
+				property_information = new PropertyDetails();
+				property_information.setUserId(resultSet.getInt(1));
+				property_information.setLocationId(resultSet.getInt(2));
+				property_information.setMarketValue(resultSet.getInt(3));
+				property_information.setYearBuilt(resultSet.getInt(4));
+				property_information.setSqft(resultSet.getDouble(5));
+				property_information.setDwellStyle(resultSet.getString(6));
+				property_information.setRoofMaterial(resultSet.getString(7));
+				property_information.setGarageType(resultSet.getString(8));
+                property_information.setNumFullBath(resultSet.getInt(9));
+                property_information.setNumHalfBath(resultSet.getInt(10));
+                property_information.setHasPool(resultSet.getString(11));
+			}
+			System.out.println(property_information.getMarketValue());
+			stmt.close();
+		}
+		catch (SQLException e)
+		{
+			throw new RegistrationException(e.getMessage());
+		}
+		catch(Exception e)
+		{
+			throw new RegistrationException(e.getMessage());
+		} 
+		finally
+		{
+			try
+			{
+				resultSet.close();
+				stmt.close();
+				conn.close();
+			}
+			catch (SQLException e)
+			{
+			}
+		}
+		return property_information;
+	}
+	public PropertyDetails getOneLocationId(final int user_id , final int location_id) throws RegistrationException
+	{
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet resultSet = null;
+		PropertyDetails property_information = null;
+
+		try
+		{
+			final AbstractDAOFactory daoFactory = AbstractDAOFactory.getDaoFactory(RegUserConstants.ORACLE);
+			conn = daoFactory.getConnection();
+			stmt = conn.prepareStatement(OracleSqlQueries.SELECT_ONE_PROPERTY);
+			stmt.setInt(1, user_id);
+			stmt.setInt(2, location_id);
+			resultSet = stmt.executeQuery();
+			if (resultSet.next()) {
+				property_information = new PropertyDetails();
+				property_information.setUserId(resultSet.getInt(1));
+				property_information.setLocationId(resultSet.getInt(2));
+				property_information.setMarketValue(resultSet.getInt(3));
+				property_information.setYearBuilt(resultSet.getInt(4));
+				property_information.setSqft(resultSet.getDouble(5));
+				property_information.setDwellStyle(resultSet.getString(6));
+				property_information.setRoofMaterial(resultSet.getString(7));
+				property_information.setGarageType(resultSet.getString(8));
+                property_information.setNumFullBath(resultSet.getInt(9));
+                property_information.setNumHalfBath(resultSet.getInt(10));
+                property_information.setHasPool(resultSet.getString(11));
+			}
+			System.out.println(property_information.getMarketValue());
+			stmt.close();
+		}
+		catch (SQLException e)
+		{
+			throw new RegistrationException(e.getMessage());
+		}
+		catch(Exception e)
+		{
+			throw new RegistrationException(e.getMessage());
+		} 
+		finally
+		{
+			try
+			{
+				resultSet.close();
+				stmt.close();
+				conn.close();
+			}
+			catch (SQLException e)
+			{
+			}
+		}
+		return property_information;
+	}
+	public void savePropertyDetails(final PropertyDetails property_information) throws RegistrationException
+	{
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		try
+		{
+			final AbstractDAOFactory daoFactory = AbstractDAOFactory.getDaoFactory(RegUserConstants.ORACLE);
+			conn = daoFactory.getConnection();
+			stmt = conn.prepareStatement(OracleSqlQueries.SAVE_PROPERTY_DETAILS);
+			stmt.setInt(1, property_information.getUserId());
+			stmt.setInt(2, property_information.getLocationId());
+			stmt.setInt(3, property_information.getMarketValue());
+			stmt.setInt(4, property_information.getYearBuilt());
+			stmt.setDouble(5, property_information.getSqft());
+			stmt.setString(6, property_information.getDwellStyle());
+			stmt.setString(7, property_information.getRoofMaterial());
+			stmt.setString(8, property_information.getGarageType());
+            stmt.setInt(9, property_information.getNumFullBath());
+            stmt.setInt(10, property_information.getNumHalfBath());
+            stmt.setString(11, property_information.getHasPool());
+			stmt.executeUpdate();
+			stmt.close();
+		}
+		catch (SQLException e)
+		{
+			throw new RegistrationException(e.getMessage());
+		}
+		catch(Exception e)
+		{
+			throw new RegistrationException(e.getMessage());
+		} 
+		finally
+		{
+			try
+			{
+				stmt.close();
+				conn.close();
+			}
+			catch (SQLException e)
+			{
+				
+			}
+		}
+	}
+	public static void main(String[] args) throws RegistrationException {
+		PropertyDetails o = new PropertyDetails();
+		o.setLocationId(2);
+		o.setMarketValue(1);
+		o.setYearBuilt(2002);
+		o.setSqft(2000);
+		o.setDwellStyle("trytrytr");
+		o.setRoofMaterial("tryghgfh");
+		o.setGarageType("fdhfdh");
+		o.setNumFullBath(1);
+		o.setNumHalfBath(0);
+		o.setHasPool("no");
+		PropertyDetailDAO oo = new PropertyDetailDAO();
+		oo.savePropertyDetails(o);
+>>>>>>> ac3a5900db579f412059b00fda1641909af1248d
+		
+				try {
+					
+					String action = request.getParameter("action");
+					final HttpSession session = request.getSession();
+					if(session.getAttribute("user") != null ) {
+						if( "save".equals(action)) {
+							System.out.println("inside the propertyservlet save");
+							
+							int location_id = Integer.parseInt(request.getParameter("location_id"));
+							int user_id= Integer.parseInt(request.getParameter("user_id"));
+							System.out.println(location_id);
+							int market_value = Integer.parseInt(request.getParameter("market_value"));
+							System.out.println(market_value);
+							int year_built = Integer.parseInt(request.getParameter("year_built"));
+							System.out.println(year_built);
+							double sqft =Double.parseDouble(request.getParameter("sqft"));
+							System.out.println(sqft);
+							String dwell_style = request.getParameter("dwell_style");
+							System.out.println(dwell_style);
+							String roof_material = request.getParameter("roof_material");
+							System.out.println(roof_material);
+							String garage_type = request.getParameter("garage_type");
+							System.out.println(garage_type);
+							int num_full_bath = Integer.parseInt(request.getParameter("num_full_bath"));
+							System.out.println(num_full_bath);
+							int num_half_bath = Integer.parseInt(request.getParameter("num_half_bath"));					
+							System.out.println(num_half_bath);
+							String has_pool = request.getParameter("has_pool");
+							System.out.println(has_pool);
+							System.out.println(user_id+  " " +location_id+" "+ market_value+" "+ year_built+" "+sqft+" "+dwell_style+" "+roof_material+" "+garage_type+" "+num_full_bath+" "+ num_half_bath +" "+ has_pool);
+							
+							PropertyDetails property = new PropertyDetails();
+							property.setUserId(user_id);
+							property.setLocationId(location_id);
+							property.setMarketValue(market_value);
+							property.setYearBuilt(year_built);
+							property.setSqft(sqft);
+							property.setDwellStyle(dwell_style);
+							property.setRoofMaterial(roof_material);
+							property.setGarageType(garage_type);
+							property.setNumFullBath(num_full_bath);
+							property.setNumHalfBath(num_half_bath);
+							property.setHasPool(has_pool);
+							PropertyDetailBO propertyBO = new PropertyDetailBO();
+							propertyBO.saveProperty(property);
+							final RequestDispatcher dispatcher = request.getRequestDispatcher("coveragedetails.jsp");
+							dispatcher.forward(request, response);
+						}
+						
+					}
+//					}
+//					else if ("gethomeowner".equals(action)){
+//						String f_name = request.getParameter("f_name");
+//						String l_name = request.getParameter("l_name");
+//						String password = request.getParameter("password");
+//						StudentBO studentBO = new StudentBO();
+//						Homeowners student = studentBO.getStudent(f_name);
+//						
+//						if(student != null && password.equals(student.getPassword())){
+//							session.setAttribute("username", f_name);
+//							session.setAttribute("student", student);
+//							final RequestDispatcher dispatcher = request.getRequestDispatcher(RegStuConstants.RegisterToCourse);
+//							dispatcher.forward(request, response);
+//						}
+						
+//					}
+					
+					}
+					catch (Exception e) {
+						
+						request.setAttribute("message", e.getMessage());
+						final RequestDispatcher dispatcher = request.getRequestDispatcher(RegUserConstants.ERROR);
+						dispatcher.forward(request, response);
+					}
+			
+	}
+
+}

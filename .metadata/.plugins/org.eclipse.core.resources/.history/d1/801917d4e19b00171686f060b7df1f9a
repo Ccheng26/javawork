@@ -1,0 +1,103 @@
+package com.home.bo;
+
+import java.util.Calendar;
+
+import com.home.dao.QuoteDetailDAO;
+import com.home.exception.RegistrationException;
+import com.home.model.*;
+
+//get user and return user
+//query by string
+//userDAO makes connection and queries database
+public class QuoteDetailBO {
+	public double createDwellingCoverage(PropertyDetails property) {
+
+		double home_value = 120 * property.getSqft();
+		int yearbuilt = property.getYearBuilt();
+		int year = Calendar.getInstance().get(Calendar.YEAR);
+		int difference = year - yearbuilt;
+		double coverage;
+
+		if (difference > 0 && difference < 5) {
+			coverage = home_value - (0.10 * home_value);
+		} else if (10 > difference && difference >= 5) {
+			coverage = home_value - (0.20 * home_value);
+		} else if (20 > difference && difference >= 10) {
+			coverage = home_value - (0.30 * home_value);
+		} else {
+			coverage = home_value - (0.50 * home_value);
+		}
+		return coverage;
+	}
+
+	public double makeMonthlyPremium(PropertyDetails property, LocationAddress locale) {
+
+		double market_value = (double) property.getMarketValue();
+		double startvalue = (market_value / 1000.00) * 5.0;
+		String residence = locale.getResidenceType();
+		System.out.println(residence);
+		double monthly;
+		if ("Single-Family Home".equals(residence)) {
+			monthly = (startvalue + .5 * startvalue) / 12;
+		} else if ("Condo".equals(residence)) {
+			monthly = (startvalue + .06 * startvalue) / 12;
+		} else if ("Duplex".equals(residence)) {
+			monthly = (startvalue + .06 * startvalue) / 12;
+		} else if ("Apartment".equals(residence)) {
+			monthly = (startvalue + .06 * startvalue) / 12;
+		} else if ("Townhouse".equals(residence)) {
+			monthly = (startvalue + .07 * startvalue) / 12;
+		} else if ("Rowhouse".equals(residence)) {
+			monthly = (startvalue + .07 * startvalue) / 12;
+		} else {
+			monthly = startvalue / 12;
+		}
+		return monthly;
+	}
+	public QuoteDetails getQuoteDetails(final int user_id) throws RegistrationException {
+
+		final QuoteDetailDAO loginDAO = new QuoteDetailDAO();
+		QuoteDetails quote = null;
+		try {
+			quote = loginDAO.getQuoteDetails(user_id);
+		} catch (RegistrationException e) {
+			throw new RegistrationException(e.getMessage());
+		}
+		return quote;
+
+	}
+
+	public void saveQuote(final QuoteDetails quote, final PropertyDetails property, final LocationAddress locale)
+			throws RegistrationException {
+		/**
+		 * System.out.println(quoteList.size()); for(LocationAddress l : locDetails ) {
+		 * System.out.println(locDetails.getResidenceType());
+		 **/
+		final QuoteDetailDAO quoteDAO = new QuoteDetailDAO();
+		try {
+			quoteDAO.saveQuoteDetails(quote, property, locale);
+
+		} catch (RegistrationException e) {
+			throw new RegistrationException(e.getMessage());
+		}
+	}
+
+	public static void main(String[] args) throws RegistrationException {
+
+		// LocationAddressBO loc = new LocationAddressBO();
+		// LocationAddress locale = loc.getLocationAddress(1);
+		//
+		// PropertyDetailBO o = new PropertyDetailBO();
+		// PropertyDetails property = o.getLocationId(1);
+		// System.out.println(o.getLocationId(1).getDwellStyle());
+		// System.out.println(o.getLocationId(1).getGarageType());
+		// System.out.println(o.getLocationId(1).getHasPool());
+		// System.out.println(o.getLocationId(1).getMarketValue());
+		// QuoteDetailBO oo = new QuoteDetailBO();
+		// System.out.println("property is "+ property.getMarketValue()+ "locale is" +
+		// locale.getLocationId());
+		// oo.saveQuote(property, locale);
+		// oo.saveQuote(quote, o.getLocationId(1), loc.getLocationAddressr(1));
+
+	}
+}

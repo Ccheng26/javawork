@@ -1,0 +1,79 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Coverage Details</title>
+<link rel="stylesheet" href="./CSS/style.css">
+</head>
+<body>
+<div class="container">
+		<div class="logintxtsection">
+			<img class="stockphoto1" style="width:300px" alt="home" src="http://www.leisepropertyservices.com/wp-content/uploads/2014/12/selling-your-home-cedar-shingle-home11.jpg">
+		</div>
+<<<<<<< HEAD
+<%=(String)request.getAttribute("monthly_premium")%>
+<%=(String)request.getAttribute("dwelling_coverage")%>
+<%=(String)request.getAttribute("detached_structures")%>
+<%=(String)request.getAttribute("personal_property")%>
+<%=(String)request.getAttribute("med_exp")%>
+<%=(String)request.getAttribute("add_living_expenses")%>
+<%=(String)request.getAttribute("deductible")%>
+<%=(String)request.getAttribute("issue_date")%>
+=======
+		
+>>>>>>> 68a47d2063b178540f1a0279ba08cbd929c72707
+			<a	href="" >Additional Info</a>
+			<div>
+				<table>
+					<tr><div class="loginformsection"></tr>
+					<tr>
+						<th>Quote Id</th>
+						<td>$1</td>
+					</tr>
+					<tr>
+						<th>Monthly Premium</th>
+<<<<<<< HEAD
+						<td>$<%=(String)request.getAttribute("monthly_premium")%></td>
+=======
+						<td>$2</td>
+>>>>>>> 68a47d2063b178540f1a0279ba08cbd929c72707
+					</tr>
+					<tr>
+						<th>Dwelling Coverage</th>
+						<td>$3</td>
+					</tr>
+					<tr>
+						<th>Detached Structure</th>
+						<td>$4</td>
+					</tr>
+					<tr>
+						<th>Personal Property</th>
+						<td>$5</td>
+					</tr>
+					<tr>
+						<th>Additional living expense </th>
+						<td>$6</td>
+					</tr>
+					<tr>
+						<th>Medical expense</th>
+						<td>$7</td>
+					</tr>
+					<tr>
+						<th>Deductible</th>
+						<td>$8</td>
+					</tr>
+					<tr>
+					</tr>
+				
+				</table>
+				<form method="post">  
+					<input type="submit" name="Proceed to buy" value="continue"/>
+				</form>
+			</div>
+		</div>
+		
+	</div>
+</body>
+</html>

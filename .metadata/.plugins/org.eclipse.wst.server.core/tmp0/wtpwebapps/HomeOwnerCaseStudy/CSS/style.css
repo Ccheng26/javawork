@@ -1,0 +1,77 @@
+/* https://upload.wikimedia.org/wikipedia/commons/e/e8/Photograph_of_a_House_in_Ste_Genevieve_MO.jpg */
+
+.container {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    width:50%;
+  }
+  @media (min-width: 768px) {
+    .container {
+      width: 750px;
+    }
+  }
+  @media (min-width: 992px) {
+    .container {
+      width: 970px;
+    }
+  }
+  @media (min-width: 1200px) {
+    .container {
+      width: 1170px;
+    }
+  }
+.logintxtsection {
+    width: 50%;
+    float: left;
+    display: inline-block;
+}
+.loginformsection{
+    display: inline-block
+}
+.logintxt{
+    font-style: italic;
+}
+.stockphoto1{
+    background-image: url("https://upload.wikimedia.org/wikipedia/commons/e/e8/Photograph_of_a_House_in_Ste_Genevieve_MO.jpg");
+    width: 200px;
+    height: 200px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+input{
+    margin: 5px 0
+}
+
+/* registration page */
+.registernote, .userdetail {
+    text-align: center;
+}
+
+/* header */
+.header{
+	width:75%;
+	margin-right:auto;
+	margin-left:auto;
+}
+.headertxt{
+    text-align: center;
+}
+.nav{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* footer */
+.footer{
+	clear: both;
+    width:75%;
+    text-align: center;
+    margin-right:auto;
+	margin-left:auto;
+}
+
+.asterisk{
+	color:red;
+}

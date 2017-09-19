@@ -1,0 +1,6 @@
+package com.junit.scholar;
+
+public interface Scholar {
+	public boolean register(String name, int age, String subject, String guideName);
+	public void rank(int marks);
+}

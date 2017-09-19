@@ -1,0 +1,16 @@
+package com.home.util;
+
+public class OracleSqlQueries {
+	//Queries to save form information
+	public static final String SAVE_USER = "INSERT INTO home_users(username, username_password, account_type) values(?, ?, ?)";
+	public static final String SAVE_LOCATION = "INSERT INTO location_add (user_id, residence_type, address_line1, address_line2, city, state, zip, residence_use) values(?, ?, ?, ?, ?, ?, ?, ?)";
+	public static final String SAVE_HOMEOWNER = "INSERT INTO homeowners (user_id, first_name,last_name, dob, retired ,ssn ,email) VALUES (?, ?, ?, ?, ?, ?, ?)";
+	public static final String SAVE_PROPERTY_DETAILS = "INSERT INTO property_details (location_id, market_value, year_built, sqft, dwell_style, roof_material, garage_type, num_full_bath, num_half_bath, has_pool) values(?, ?, ?, ?, ?, ?,?,?,?,?)";
+
+	//validation checks
+	
+	public static final String SELECT_HOMEOWNER = "SELECT * FROM homeowners WHERE user_id=?";
+	public static final String SELECT_USER_LOGIN = "SELECT * FROM home_users WHERE username=?";
+	public static final String SELECT_PROPERTY = "SELECT * FROM property_details WHERE location_id=?";
+	public static final String SELECT_LOCATION_ADDRESS = "SELECT * FROM location_add WHERE user_id=?";
+}
